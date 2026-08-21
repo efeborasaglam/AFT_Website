@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../context/AppContext.jsx';
 import { useNavigate } from 'react-router-dom';
 
-const RelatedDoctors = ({ docID, speciality }) => {
+const RelatedDoctors = ({ docId, speciality }) => {
     const { doctors } = useContext(AppContext);
     const navigate = useNavigate();
 
@@ -11,11 +11,13 @@ const RelatedDoctors = ({ docID, speciality }) => {
     useEffect(() => {
         if (doctors.length > 0 && speciality) {
             const doctorsData = doctors.filter(
-                (doc) => doc.speciality === speciality && doc._id !== docID
+                (doc) =>
+                    doc.speciality.some((s) => speciality.includes(s)) &&
+                    doc._id !== docId
             );
             setRelDoc(doctorsData);
         }
-    }, [doctors, speciality, docID]);
+    }, [doctors, speciality, docId]);
 
     return (
         <div>
@@ -25,9 +27,10 @@ const RelatedDoctors = ({ docID, speciality }) => {
                     'flex flex-col items-center gap-4 my-16 text-gray-900 md:mx-10'
                 }
             >
-                <h1 className={'text-3xl font-medium'}>Top Doctors to Book</h1>
+                <h1 className={'text-3xl font-medium'}>Top Trainers to Book</h1>
                 <p className={'sm:w-1/3 text-center text-sm'}>
-                    Simply browse through our extensive list of trusted doctors.
+                    Simply browse through our extensive list of trusted
+                    trainers.
                 </p>
                 <div
                     className={
@@ -40,7 +43,10 @@ const RelatedDoctors = ({ docID, speciality }) => {
                                 'border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transation-all duration-500'
                             }
                             key={index}
-                            onClick={() => navigate(`/appointment/${item._id}`)}
+                            onClick={() => {
+                                navigate(`/appointment/${item._id}`);
+                                scrollTo(0, 0);
+                            }}
                         >
                             <img
                                 className={'bg-glue-50'}
@@ -49,16 +55,16 @@ const RelatedDoctors = ({ docID, speciality }) => {
                             />
                             <div className={'p-4'}>
                                 <div
-                                    className={
-                                        'flex items-center gap-2 text-sm text-center text-green-500'
-                                    }
+                                    className={`flex items-center gap-2 text-sm text-center ${item.available ? 'text-green-500' : 'text-gray-500'}`}
                                 >
                                     <p
-                                        className={
-                                            'w-2 h-2 bg-green-500 rounded-full'
-                                        }
+                                        className={`w-2 h-2 ${item.available ? 'bg-green-500' : 'bg-gray-500'} rounded-full`}
                                     ></p>
-                                    <p>Available</p>
+                                    <p>
+                                        {item.available
+                                            ? 'Available'
+                                            : 'Not Available'}
+                                    </p>
                                 </div>
                                 <p
                                     className={
@@ -68,7 +74,7 @@ const RelatedDoctors = ({ docID, speciality }) => {
                                     {item.name}
                                 </p>
                                 <p className={'text-gray-600 text-sm'}>
-                                    {item.speciality}
+                                    {item.speciality.join(', ')}
                                 </p>
                             </div>
                         </div>

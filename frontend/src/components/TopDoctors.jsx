@@ -12,40 +12,45 @@ const TopDoctors = () => {
                 'flex flex-col items-center gap-4 my-16 text-gray-900 md:mx-10'
             }
         >
-            <h1 className={'text-3xl font-medium'}>Top Doctors to Book</h1>
+            <h1 className={'text-3xl font-medium'}>Trainers to Book</h1>
             <p className={'sm:w-1/3 text-center text-sm'}>
-                Simply browse through our extensive list of trusted doctors.
+                Simply browse through our extensive list of trusted Trainers.
             </p>
+
+            {/* Hier von grid auf flex + justify-center gewechselt */}
             <div
                 className={
-                    'w-full grid grid-cols-auto gap-4 pt-5 gap-y-6 px-3 sm:px-0'
+                    'w-full flex flex-wrap justify-center gap-4 pt-5 gap-y-6 px-3 sm:px-0'
                 }
             >
                 {doctors.slice(0, 10).map((item, index) => (
                     <div
                         className={
-                            'border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transation-all duration-500'
+                            'border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500 w-full sm:w-64'
                         }
                         key={index}
-                        onClick={() => navigate(`/appointment/${item._id}`)}
+                        onClick={() => {
+                            navigate(`/appointment/${item._id}`);
+                            scrollTo(0, 0);
+                        }}
                     >
                         <img
-                            className={'bg-glue-50'}
+                            className={'bg-glue-50 w-full object-cover'}
                             src={item.image}
                             alt={item.name}
                         />
                         <div className={'p-4'}>
                             <div
-                                className={
-                                    'flex items-center gap-2 text-sm text-center text-green-500'
-                                }
+                                className={`flex items-center gap-2 text-sm text-center ${item.available ? 'text-green-500' : 'text-gray-500'}`}
                             >
                                 <p
-                                    className={
-                                        'w-2 h-2 bg-green-500 rounded-full'
-                                    }
+                                    className={`w-2 h-2 ${item.available ? 'bg-green-500' : 'bg-gray-500'} rounded-full`}
                                 ></p>
-                                <p>Available</p>
+                                <p>
+                                    {item.available
+                                        ? 'Available'
+                                        : 'Not Available'}
+                                </p>
                             </div>
                             <p className={'text-gray-900 text-lg font-medium'}>
                                 {item.name}
@@ -57,6 +62,7 @@ const TopDoctors = () => {
                     </div>
                 ))}
             </div>
+
             <button
                 onClick={() => {
                     navigate('/doctors');
@@ -71,4 +77,5 @@ const TopDoctors = () => {
         </div>
     );
 };
+
 export default TopDoctors;

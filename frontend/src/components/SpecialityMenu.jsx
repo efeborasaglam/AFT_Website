@@ -10,7 +10,8 @@ const SpecialityMenu = () => {
         >
             <h1 className={'text-3xl font-medium'}>Find by Speciality</h1>
             <p className={'sm:w-1/3 text-center text-sm'}>
-                Simply browse throur our extensiones niggar baller los grrahhhh
+                Simply browse through our extensive list of trusted
+                specialities.
             </p>
             <div
                 className={

@@ -1,9 +1,12 @@
 import React from 'react';
 import { assets } from '../assets/assets.js';
+import { useLocation } from 'react-router-dom';
 
 const Footer = () => {
+    const location = useLocation();
+    const isHome = location.pathname === '/';
     return (
-        <div>
+        <div className={`${isHome ? 'sm:mx-[11%]' : ''}`}>
             <div
                 className={
                     'flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10  mt-40 text-sm'
@@ -46,6 +49,9 @@ const Footer = () => {
                     <ul className={'flex flex-col gap-2 text-gray-600'}>
                         <li>+654641231</li>
                         <li>fener@fener</li>
+                        <li className={'ms-8'}>
+                            <i className="bi bi-instagram text-xl"></i>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -53,7 +59,7 @@ const Footer = () => {
                 {/*  copy right  */}
                 <hr />
                 <p className={'py-5 text-sm text-center text-gray-500'}>
-                    Copyright 2024@ Prescripto - All Right Reserved.
+                    Copyright 2024@ AFT Performance - All Right Reserved.
                 </p>
             </div>
         </div>

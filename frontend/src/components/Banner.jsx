@@ -18,7 +18,7 @@ const Banner = () => {
                     }
                 >
                     <p>Book Appointment</p>
-                    <p className={'mt-4'}>With 100+ Trusted Doctors</p>
+                    <p className={'mt-4'}>With Trusted Trainers</p>
                 </div>
                 <button
                     onClick={() => {
