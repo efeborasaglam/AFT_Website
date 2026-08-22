@@ -136,7 +136,7 @@ import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/AppContext.jsx';
 import { assets } from '../assets/assets.js';
 
-const AboutHero = () => {
+const Doctors = () => {
     const { doctors } = useContext(AppContext);
     const navigate = useNavigate();
     const [openIndex, setOpenIndex] = useState(null);
@@ -290,4 +290,4 @@ const AboutHero = () => {
     );
 };
 
-export default AboutHero;
+export default Doctors;
