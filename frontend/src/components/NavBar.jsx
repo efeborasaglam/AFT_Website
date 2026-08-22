@@ -82,7 +82,7 @@ const NavBar = () => {
                         <img
                             src={assets.dropdown_icon}
                             alt={'arrow'}
-                            className={'w-2.5'}
+                            className={'w-2.5 hidden md:flex'}
                         />
                         <div
                             className={
@@ -196,6 +196,65 @@ const NavBar = () => {
                                 CONTACT
                             </p>
                         </NavLink>
+                        {token && userData ? (
+                            <>
+                                <NavLink
+                                    to={'/my-profile'}
+                                    onClick={() => setShowMenu(false)}
+                                >
+                                    <p
+                                        className={
+                                            'hover:text-black cursor-pointer'
+                                        }
+                                    >
+                                        MY PROFILE
+                                    </p>
+                                </NavLink>
+                                <NavLink
+                                    to={'/my-appointments'}
+                                    onClick={() => setShowMenu(false)}
+                                >
+                                    <p
+                                        className={
+                                            'hover:text-black cursor-pointer'
+                                        }
+                                    >
+                                        MY APPOINTMENTS
+                                    </p>
+                                </NavLink>
+                                <NavLink
+                                    to={'/'}
+                                    onClick={() => {
+                                        setShowMenu(false);
+                                        logout();
+                                    }}
+                                    id={'logout'}
+                                >
+                                    <p
+                                        className={
+                                            'hover:text-white text-white cursor-pointer mt-15 bg-red-500 p-3'
+                                        }
+                                    >
+                                        LOGOUT
+                                    </p>
+                                </NavLink>
+                            </>
+                        ) : (
+                            <NavLink
+                                to={'/login'}
+                                onClick={() => {
+                                    setShowMenu(false);
+                                }}
+                            >
+                                <p
+                                    className={
+                                        'bg-primary text-white px-8 py-3 mt-15 rounded-full font-light'
+                                    }
+                                >
+                                    Create account
+                                </p>
+                            </NavLink>
+                        )}
                     </ul>
                 </div>
             </div>
