@@ -65,7 +65,7 @@ const TopDoctors = () => {
 
             <button
                 onClick={() => {
-                    navigate('/doctors');
+                    navigate('/trainers');
                     scrollTo(0, 0);
                 }}
                 className={

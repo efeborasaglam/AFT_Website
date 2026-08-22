@@ -82,7 +82,7 @@ const RelatedDoctors = ({ docId, speciality }) => {
                 </div>
                 <button
                     onClick={() => {
-                        navigate('/doctors');
+                        navigate('/trainers');
                         scrollTo(0, 0);
                     }}
                     className={

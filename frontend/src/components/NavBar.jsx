@@ -42,7 +42,7 @@ const NavBar = () => {
                         }
                     />
                 </NavLink>
-                <NavLink to={'/doctors'}>
+                <NavLink to={'/trainers'}>
                     <li className={'py-1'}>ALL Trainers</li>
                     <hr
                         className={
@@ -173,7 +173,7 @@ const NavBar = () => {
                         </NavLink>
                         <NavLink
                             onClick={() => setShowMenu(false)}
-                            to={'/doctors'}
+                            to={'/trainers'}
                         >
                             <p className={'px-4 py-2 rounded inline-block'}>
                                 {' '}
