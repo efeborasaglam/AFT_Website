@@ -32,40 +32,40 @@ const Contact = () => {
     };
 
     return (
-        <div>
-            <div className="text-center text-2xl pt-10 text-gray-500">
+        <div className={'bg-[#0C0E12]'}>
+            <div className="text-center text-2xl pt-10 text-[#F5F3EE]">
                 <p>
                     CONTACT{' '}
-                    <span className="text-gray-700 font-semibold">US</span>
+                    <span className="text-[#FF4B2E] font-semibold">US</span>
                 </p>
             </div>
 
             <div className="my-10 flex flex-col justify-center lg:flex-row gap-10 mb-28 text-sm px-4 lg:px-0">
                 <img
                     className="w-full lg:max-w-[400px] rounded object-cover"
-                    src={assets.contact_image}
+                    src={assets.football_7}
                     alt="Contact"
                 />
 
                 <div className="flex flex-col justify-center items-start gap-6 lg:max-w-[320px]">
-                    <p className="font-semibold text-lg text-gray-600">
+                    <p className="font-semibold text-lg text-[#F5F3EE]">
                         OUR OFFICE
                     </p>
-                    <p className="text-gray-600">
+                    <p className="text-[#9AA0A8]">
                         9014 St. Gallen <br />
                         Lehnstrasse 73
                     </p>
-                    <p className="text-gray-600">
+                    <p className="text-[#9AA0A8]">
                         Tel: 078 730 46 45 <br />
                         Email: efebora.saglam@hotmail.com
                     </p>
-                    <p className="font-semibold text-lg text-gray-600">
+                    <p className="font-semibold text-lg text-[#F5F3EE]">
                         CAREERS AT AFT Performance
                     </p>
-                    <p className="text-gray-500">
+                    <p className="text-[#9AA0A8]">
                         Learn about our teams and job openings
                     </p>
-                    <button className="border border-black px-8 py-4 text-sm hover:bg-black hover:text-white transition-all duration-500">
+                    <button className="border border-[#2E333B] text-[#F5F3EE] px-8 py-4 text-sm hover:bg-[#FF4B2E] hover:text-[#0C0E12] hover:border-[#FF4B2E] transition-all duration-500">
                         Explore Jobs
                     </button>
                 </div>
@@ -74,16 +74,16 @@ const Contact = () => {
                 <form
                     ref={form}
                     onSubmit={sendEmail}
-                    className="flex flex-col gap-4 w-full lg:max-w-[900px] border border-gray-200 rounded-lg p-8"
+                    className="flex flex-col gap-4 w-full lg:max-w-[900px] border border-[#2E333B] rounded-lg p-8"
                 >
-                    <p className="font-semibold text-lg text-gray-600 mb-2">
+                    <p className="font-semibold text-lg text-[#F5F3EE] mb-2">
                         SEND US A MESSAGE
                     </p>
 
                     <div className="flex flex-col gap-1">
                         <label
                             htmlFor="from_name"
-                            className="text-gray-600 text-xs font-medium"
+                            className="text-[#9AA0A8] text-xs font-medium"
                         >
                             Your Name
                         </label>
@@ -92,14 +92,14 @@ const Contact = () => {
                             name="from_name"
                             id="from_name"
                             required
-                            className="border border-gray-300 rounded px-4 py-2 outline-none focus:border-primary transition-all"
+                            className="border border-[#2E333B] bg-[#16191F] text-[#F5F3EE] rounded px-4 py-2 outline-none focus:border-[#FF4B2E] transition-all"
                         />
                     </div>
 
                     <div className="flex flex-col gap-1">
                         <label
                             htmlFor="to_name"
-                            className="text-gray-600 text-xs font-medium"
+                            className="text-[#9AA0A8] text-xs font-medium"
                         >
                             To
                         </label>
@@ -108,14 +108,14 @@ const Contact = () => {
                             name="to_name"
                             id="to_name"
                             required
-                            className="border border-gray-300 rounded px-4 py-2 outline-none focus:border-primary transition-all"
+                            className="border border-[#2E333B] bg-[#16191F] text-[#F5F3EE] rounded px-4 py-2 outline-none focus:border-[#FF4B2E] transition-all"
                         />
                     </div>
 
                     <div className="flex flex-col gap-1">
                         <label
                             htmlFor="reply_to"
-                            className="text-gray-600 text-xs font-medium"
+                            className="text-[#9AA0A8] text-xs font-medium"
                         >
                             Your Email
                         </label>
@@ -124,14 +124,14 @@ const Contact = () => {
                             name="reply_to"
                             id="reply_to"
                             required
-                            className="border border-gray-300 rounded px-4 py-2 outline-none focus:border-primary transition-all"
+                            className="border border-[#2E333B] bg-[#16191F] text-[#F5F3EE] rounded px-4 py-2 outline-none focus:border-[#FF4B2E] transition-all"
                         />
                     </div>
 
                     <div className="flex flex-col gap-1">
                         <label
                             htmlFor="message"
-                            className="text-gray-600 text-xs font-medium"
+                            className="text-[#9AA0A8] text-xs font-medium"
                         >
                             Message
                         </label>
@@ -140,14 +140,14 @@ const Contact = () => {
                             id="message"
                             rows={4}
                             required
-                            className="border border-gray-300 rounded px-4 py-2 outline-none focus:border-primary transition-all resize-none"
+                            className="border border-[#2E333B] bg-[#16191F] text-[#F5F3EE] rounded px-4 py-2 outline-none focus:border-[#FF4B2E] transition-all resize-none"
                         />
                     </div>
 
                     <button
                         type="submit"
                         disabled={sending}
-                        className="border border-black px-8 py-4 text-sm mt-2 hover:bg-black hover:text-white transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="border border-[#2E333B] text-[#F5F3EE] px-8 py-4 text-sm mt-2 hover:bg-[#FF4B2E] hover:text-[#0C0E12] hover:border-[#FF4B2E] transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         {sending ? 'Sending...' : 'Send Email'}
                     </button>

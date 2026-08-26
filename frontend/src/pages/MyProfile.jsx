@@ -44,7 +44,11 @@ const MyProfile = () => {
 
     return (
         userData && (
-            <div className={'max-w-lg flex flex-col gap-2 text-sm'}>
+            <div
+                className={
+                    'max-w-lg flex flex-col gap-2 text-sm sm:mx-[11%] text-[#D6D3CE]'
+                }
+            >
                 {isEdit ? (
                     <label htmlFor={'image'}>
                         <div className={'inline-block relative cursor-pointer'}>
@@ -79,7 +83,7 @@ const MyProfile = () => {
                 {isEdit ? (
                     <input
                         className={
-                            'bg-gray-50 text-3xl font-medium max-w-60 mt-4'
+                            'bg-[#16191F] text-[#F5F3EE] text-3xl font-medium max-w-60 mt-4'
                         }
                         type={'text'}
                         value={userData.name}
@@ -91,27 +95,34 @@ const MyProfile = () => {
                         }
                     />
                 ) : (
-                    <p className={'font-medium text-3xl text-neutral-800 mt-4'}>
+                    <p className={'font-medium text-3xl text-[#F5F3EE] mt-4'}>
                         {userData.name}
                     </p>
                 )}
-                <hr className={'bg-zinc-400 h-[1px] border-none'} />
+
+                <hr className={'bg-[#2E333B] h-[1px] border-none'} />
+
                 <div>
-                    <p className={'text-neutral-500 underline mt-3'}>
+                    <p className={'text-[#9AA0A8] underline mt-3'}>
                         CONTACT INFORMATION
                     </p>
+
                     <div
                         className={
-                            'grid grid-cols-[1fr_3fr] gap-y-2.5 mt-3 text-neutral-700'
+                            'grid grid-cols-[1fr_3fr] gap-y-2.5 mt-3 text-[#D6D3CE]'
                         }
                     >
                         <p className={'font-medium'}>Email id: </p>
-                        <p className={'text-blue-500'}>{userData.email}</p>
+                        <p className={'text-[#FF4B2E]'}>{userData.email}</p>
+
                         <p className={'font-medium'}>Phone: </p>
+
                         {isEdit ? (
                             <input
                                 type={'text'}
-                                className={'bg-gray-100 max-w-52'}
+                                className={
+                                    'bg-[#16191F] text-[#F5F3EE] max-w-52'
+                                }
                                 value={userData.phone}
                                 onChange={(e) =>
                                     setUserData((prev) => ({
@@ -121,9 +132,11 @@ const MyProfile = () => {
                                 }
                             />
                         ) : (
-                            <p className={'text-blue-400'}>{userData.phone}</p>
+                            <p className={'text-[#FF4B2E]'}>{userData.phone}</p>
                         )}
+
                         <p className={'font-medium'}>Address: </p>
+
                         <p>
                             {isEdit ? (
                                 <div>
@@ -137,7 +150,9 @@ const MyProfile = () => {
                                                 },
                                             }))
                                         }
-                                        className={'bg-gray-50'}
+                                        className={
+                                            'bg-[#16191F] text-[#F5F3EE]'
+                                        }
                                         value={userData.address?.line1 || ''}
                                         type={'text'}
                                     />
@@ -154,13 +169,15 @@ const MyProfile = () => {
                                                 },
                                             }))
                                         }
-                                        className={'bg-gray-50'}
+                                        className={
+                                            'bg-[#16191F] text-[#F5F3EE]'
+                                        }
                                         value={userData.address?.line2 || ''}
                                         type={'text'}
                                     />
                                 </div>
                             ) : (
-                                <p className={'text-gray-500'}>
+                                <p className={'text-[#9AA0A8]'}>
                                     {userData.address?.line1}
                                     <br />
                                     {userData.address?.line2}
@@ -169,19 +186,24 @@ const MyProfile = () => {
                         </p>
                     </div>
                 </div>
+
                 <div>
-                    <p className={'text-neutral-500 underline mt-3'}>
+                    <p className={'text-[#9AA0A8] underline mt-3'}>
                         BASIC INFORMATION
                     </p>
+
                     <div
                         className={
-                            'grid grid-cols-[1fr_3fr] gap-y-2.5 mt-3 text-neutral-700'
+                            'grid grid-cols-[1fr_3fr] gap-y-2.5 mt-3 text-[#D6D3CE]'
                         }
                     >
                         <p className={'font-medium'}>Gender: </p>
+
                         {isEdit ? (
                             <select
-                                className={'max-w-20 bg-gray-100'}
+                                className={
+                                    'max-w-20 bg-[#16191F] text-[#F5F3EE]'
+                                }
                                 onChange={(e) =>
                                     setUserData((prev) => ({
                                         ...prev,
@@ -194,13 +216,19 @@ const MyProfile = () => {
                                 <option value={'Female'}>Female</option>
                             </select>
                         ) : (
-                            <p className={'text-gray-400'}>{userData.gender}</p>
+                            <p className={'text-[#9AA0A8]'}>
+                                {userData.gender}
+                            </p>
                         )}
+
                         <p className={'font-medium'}>Birthday: </p>
+
                         {isEdit ? (
                             <input
                                 type={'date'}
-                                className={'max-w-28 bg-gray-100'}
+                                className={
+                                    'max-w-28 bg-[#16191F] text-[#F5F3EE]'
+                                }
                                 value={userData.dob}
                                 onChange={(e) =>
                                     setUserData((prev) => ({
@@ -210,7 +238,7 @@ const MyProfile = () => {
                                 }
                             />
                         ) : (
-                            <p className={'text-gray-400'}>{userData.dob}</p>
+                            <p className={'text-[#9AA0A8]'}>{userData.dob}</p>
                         )}
                     </div>
                 </div>
@@ -220,7 +248,7 @@ const MyProfile = () => {
                         <button
                             onClick={updateUserProfileData}
                             className={
-                                'border border-primary px-8 py-2 rounded-full hover:bg-primary hover:text-white transation-all duration-500'
+                                'border border-[#FF4B2E] px-8 py-2 rounded-full hover:bg-[#FF4B2E] hover:text-[#0C0E12] transition-all duration-500'
                             }
                         >
                             Save Information
@@ -228,7 +256,7 @@ const MyProfile = () => {
                     ) : (
                         <button
                             className={
-                                'border border-primary px-8 py-2 rounded-full hover:text-white hover:bg-primary transation-all duration-500'
+                                'border border-[#FF4B2E] px-8 py-2 rounded-full hover:text-[#0C0E12] hover:bg-[#FF4B2E] transition-all duration-500'
                             }
                             onClick={() => setIsEdit(true)}
                         >
@@ -240,4 +268,5 @@ const MyProfile = () => {
         )
     );
 };
+
 export default MyProfile;

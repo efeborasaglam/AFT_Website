@@ -3,7 +3,7 @@ import group_profiles from './group_profiles.png';
 import profile_pic from './profile_pic.png';
 import contact_image from './contact_image.jpg';
 import about_image from './trainer_about.jpeg';
-import logo from './logo.svg';
+import logo from './logo_white.svg';
 import dropdown_icon from './dropdown_icon.svg';
 import menu_icon from './menu_icon.svg';
 import cross_icon from './cross_icon.png';
@@ -20,6 +20,14 @@ import AthletikGruppentraining from './tennis-player.png';
 import DigitaleProgramme from './cloud-computing.png';
 import Placeholder from './placeholder.jpg';
 import background_image from './Background_Image.jfif';
+import football_1 from './football_1.jpeg';
+import football_2 from './football_2.jpeg';
+import football_3 from './football_3.jpeg';
+import football_4 from './football_4.jpeg';
+import football_5 from './football_5.jpeg';
+import football_6 from './football_6.jpeg';
+import football_7 from './football_7.jpeg';
+import football_8 from './football_8.jpeg';
 
 export const assets = {
     appointment_img,
@@ -40,6 +48,14 @@ export const assets = {
     razorpay_logo,
     Placeholder,
     background_image,
+    football_1,
+    football_2,
+    football_3,
+    football_4,
+    football_5,
+    football_6,
+    football_7,
+    football_8,
 };
 
 export const specialityData = [

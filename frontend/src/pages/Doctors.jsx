@@ -1,136 +1,3 @@
-// import React, { useContext, useEffect, useState } from 'react';
-// import { useNavigate, useParams } from 'react-router-dom';
-// import { AppContext } from '../context/AppContext.jsx';
-//
-// const Doctors = () => {
-//     const { speciality } = useParams();
-//
-//     const { doctors } = useContext(AppContext);
-//     const [filterDoc, setFilterDoc] = useState([]);
-//     const [showFilter, setShowFilter] = useState(false);
-//
-//     const navigate = useNavigate();
-//
-//     const applyFilter = () => {
-//         if (speciality) {
-//             setFilterDoc(
-//                 doctors.filter((doc) => doc.speciality.includes(speciality))
-//             );
-//         } else {
-//             setFilterDoc(doctors);
-//         }
-//     };
-//
-//     useEffect(() => {
-//         applyFilter();
-//     }, [doctors, speciality]);
-//
-//     console.log(speciality);
-//
-//     return (
-//         <div>
-//             <p className={'text-gray-600'}>
-//                 Browse through the doctors specialist.
-//             </p>
-//
-//             <div className={'flex flex-col sm:flex-row items-start gap-5 mt-5'}>
-//                 <button
-//                     className={`py-1 px-3 border rounded text-sm transition-all sm:hidden ${showFilter ? 'bg-primary text-white' : ' '}`}
-//                     onClick={() => setShowFilter((prev) => !prev)}
-//                 >
-//                     Filters
-//                 </button>
-//                 <div
-//                     className={`flex-col gap-4 text-sm text-gray-600 ${showFilter ? 'flex' : 'hidden sm:flex'}`}
-//                 >
-//                     <p
-//                         onClick={() =>
-//                             speciality === 'Athletik-Einzeltrainings'
-//                                 ? navigate('/doctors')
-//                                 : navigate('/doctors/Athletik-Einzeltrainings')
-//                         }
-//                         className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${speciality === 'Athletik-Einzeltrainings' ? 'bg-indigo-100 text-black' : ''}`}
-//                     >
-//                         Athletik-Einzeltrainings
-//                     </p>
-//                     <p
-//                         onClick={() =>
-//                             speciality === 'Athletik-Gruppentraining'
-//                                 ? navigate('/doctors')
-//                                 : navigate('/doctors/Athletik-Gruppentraining')
-//                         }
-//                         className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${speciality === 'Athletik-Gruppentraining' ? 'bg-indigo-100 text-black' : ''}`}
-//                     >
-//                         Athletik-Gruppentraining
-//                     </p>
-//                     <p
-//                         onClick={() =>
-//                             speciality === 'Online-Coaching'
-//                                 ? navigate('/doctors')
-//                                 : navigate('/doctors/Online-Coaching')
-//                         }
-//                         className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${speciality === 'Online-Coaching' ? 'bg-indigo-100 text-black' : ''}`}
-//                     >
-//                         Online-Coaching
-//                     </p>
-//                     <p
-//                         onClick={() =>
-//                             speciality === 'Digitale-Programme'
-//                                 ? navigate('/doctors')
-//                                 : navigate('/doctors/Digitale-Programme')
-//                         }
-//                         className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${speciality === 'Digitale-Programme' ? 'bg-indigo-100 text-black' : ''}`}
-//                     >
-//                         Digitale-Programme
-//                     </p>
-//                 </div>
-//                 <div className={'w-full grid grid-cols-auto gap-4 gap-y-6'}>
-//                     {filterDoc.map((item, index) => (
-//                         <div
-//                             className={
-//                                 'border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transation-all duration-500'
-//                             }
-//                             key={index}
-//                             onClick={() => navigate(`/appointment/${item._id}`)}
-//                         >
-//                             <img
-//                                 className={'bg-glue-50'}
-//                                 src={item.image}
-//                                 alt={item.name}
-//                             />
-//                             <div className={'p-4'}>
-//                                 <div
-//                                     className={`flex items-center gap-2 text-sm text-center ${item.available ? 'text-green-500' : 'text-gray-500'}`}
-//                                 >
-//                                     <p
-//                                         className={`w-2 h-2 ${item.available ? 'bg-green-500' : 'bg-gray-500'} rounded-full`}
-//                                     ></p>
-//                                     <p>
-//                                         {item.available
-//                                             ? 'Available'
-//                                             : 'Not Available'}
-//                                     </p>
-//                                 </div>
-//                                 <p
-//                                     className={
-//                                         'text-gray-900 text-lg font-medium'
-//                                     }
-//                                 >
-//                                     {item.name}
-//                                 </p>
-//                                 <p className={'text-gray-600 text-sm'}>
-//                                     {item.speciality.join(', ')}
-//                                 </p>
-//                             </div>
-//                         </div>
-//                     ))}
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// };
-// export default Doctors;
-
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/AppContext.jsx';
@@ -171,30 +38,51 @@ const Doctors = () => {
     const featuredTrainers = doctors?.slice(0, 2) || [];
 
     return (
-        <div className={'px-4 sm:px-[8%] py-16'}>
+        <div
+            className={
+                'relative bg-[#0C0E12] px-4 sm:px-[8%] py-16 overflow-hidden'
+            }
+        >
+            {/* Speed-line Signature, same motif as Header */}
+            <div className="pointer-events-none absolute inset-0 -z-0">
+                <div className="absolute -left-10 top-0 h-full w-40 -skew-x-12 bg-[#FF4B2E]/10" />
+                <div className="absolute left-24 top-0 h-full w-6 -skew-x-12 bg-[#FF4B2E]/10" />
+            </div>
+
             {/* Top section */}
-            <div className={'flex flex-col md:flex-row gap-10 md:gap-20'}>
+            <div
+                className={
+                    'relative flex flex-col md:flex-row gap-10 md:gap-20'
+                }
+            >
                 {/* Left - About text */}
                 <div className={'flex-1'}>
+                    <span className="font-mono text-xs tracking-[0.3em] text-[#C8FF3D] uppercase">
+                        Über Uns
+                    </span>
                     <h1
                         className={
-                            'text-4xl sm:text-5xl font-extrabold uppercase italic text-primary leading-tight'
+                            "font-['Anton'] uppercase text-4xl sm:text-5xl text-[#F5F3EE] leading-[0.95] mt-3"
                         }
                     >
                         Designed For
                         <br />
-                        Performance
+                        <span className="text-[#FF4B2E]">Performance</span>
                     </h1>
                     <div
                         className={
-                            'w-32 h-1 bg-blue-400 rounded-full mt-2 mb-6'
+                            'w-32 h-1 bg-[#FF4B2E] rounded-full mt-4 mb-6'
                         }
                     />
-                    <p className={'text-gray-600 leading-relaxed mb-4'}>
+                    <div
+                        className={
+                            'text-[#9AA0A8] leading-relaxed mb-4 space-y-3'
+                        }
+                    >
                         {featuredTrainers.map((trainer) => (
-                            <p>{trainer.about}</p>
+                            <p key={trainer._id}>{trainer.about}</p>
                         ))}
-                    </p>
+                    </div>
                 </div>
 
                 {/* Right - Specialities accordion */}
@@ -202,7 +90,7 @@ const Doctors = () => {
                     {specialities.map((item, index) => (
                         <div
                             key={item.title}
-                            className={'border-b border-gray-300 py-4'}
+                            className={'border-b border-[#2E333B] py-4'}
                         >
                             <button
                                 onClick={() => toggle(index)}
@@ -212,14 +100,14 @@ const Doctors = () => {
                             >
                                 <span
                                     className={
-                                        'uppercase italic font-bold text-primary text-lg'
+                                        "uppercase italic font-['Anton'] text-[#F5F3EE] text-lg"
                                     }
                                 >
                                     {item.title}
                                 </span>
                                 <span
                                     className={
-                                        'text-2xl text-primary font-light'
+                                        'text-2xl text-[#FF4B2E] font-light'
                                     }
                                 >
                                     {openIndex === index ? '−' : '+'}
@@ -234,7 +122,7 @@ const Doctors = () => {
                             >
                                 <p
                                     className={
-                                        'text-gray-500 text-sm overflow-hidden'
+                                        'text-[#9AA0A8] text-sm overflow-hidden'
                                     }
                                 >
                                     {item.description}
@@ -246,13 +134,21 @@ const Doctors = () => {
             </div>
 
             {/* Bottom - Featured trainers */}
-            <div className={'grid grid-cols-1 sm:grid-cols-2 gap-8 mt-20'}>
+            <div
+                className={
+                    'relative grid grid-cols-1 sm:grid-cols-2 gap-8 mt-20'
+                }
+            >
                 {featuredTrainers.map((trainer) => (
                     <div key={trainer._id} className={'flex flex-col'}>
                         <div
                             className={
-                                'rounded-xl overflow-hidden bg-indigo-50'
+                                'relative rounded-xl overflow-hidden bg-[#16191F]'
                             }
+                            style={{
+                                clipPath:
+                                    'polygon(8% 0, 100% 0, 100% 100%, 0 100%)',
+                            }}
                         >
                             <img
                                 src={trainer.image}
@@ -263,12 +159,12 @@ const Doctors = () => {
                         <div className={'mt-4 text-center'}>
                             <p
                                 className={
-                                    'text-xl font-bold text-primary uppercase'
+                                    "text-xl font-['Anton'] text-[#F5F3EE] uppercase"
                                 }
                             >
                                 {trainer.name}
                             </p>
-                            <p className={'text-gray-500 text-sm mb-4'}>
+                            <p className={'text-[#9AA0A8] text-sm mb-4'}>
                                 {trainer.speciality?.join(', ')}
                             </p>
                             <button
@@ -276,15 +172,15 @@ const Doctors = () => {
                                     navigate(`/appointment/${trainer._id}`)
                                 }
                                 className={
-                                    'bg-primary text-white px-8 py-3 rounded-full font-light hover:opacity-90 transition-all'
+                                    'bg-[#FF4B2E] text-[#0C0E12] px-8 py-3 rounded-full font-semibold hover:scale-105 transition-transform duration-300'
                                 }
                             >
-                                Book an appointment
+                                Termin buchen
                             </button>
                         </div>
                     </div>
                 ))}
-                <img src={assets.Placeholder} />
+                <img src={assets.football_2} className={'rounded-xl'} />
             </div>
         </div>
     );

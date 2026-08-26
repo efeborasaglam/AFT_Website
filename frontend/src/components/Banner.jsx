@@ -1,46 +1,52 @@
-import React from 'react';
-import { assets } from '../assets/assets.js';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AppContext } from '../context/AppContext.jsx';
 
 const Banner = () => {
     const navigate = useNavigate();
+    const { token, userData } = useContext(AppContext);
+
     return (
-        <div
-            className={
-                'flex bg-primary rounded-lg px-6 sm:px-10 md:px-14 lg:px-12 my-20 md:mx-10'
-            }
-        >
-            {/*  Left  */}
-            <div className={'flex-1 py-8 sm:py-10 md:py-16 lg:pl-5'}>
-                <div
-                    className={
-                        'test-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold text-white'
-                    }
-                >
-                    <p>Book Appointment</p>
-                    <p className={'mt-4'}>With Trusted Trainers</p>
-                </div>
-                <button
-                    onClick={() => {
-                        navigate('/login');
-                        scrollTo(0, 0);
-                    }}
-                    className={
-                        'bg-white text-sm sm:test-base text-gray-600 px-8 py-3 rounded-full mt-6 hover:scale-105 transation-all'
-                    }
-                >
-                    Create account
-                </button>
+        <div className="relative mx-4 sm:mx-[10%] my-20 overflow-hidden rounded-2xl bg-[#FF4B2E]">
+            {/* Speed-line Signature, passend zum Header */}
+            <div className="pointer-events-none absolute inset-0">
+                <div className="absolute -right-6 top-0 h-full w-24 skew-x-[-12deg] bg-black/10" />
+                <div className="absolute right-16 top-0 h-full w-4 skew-x-[-12deg] bg-black/10" />
             </div>
-            {/*  Right  */}
-            <div className={'hidden md:block md:w-1/2 lg:w-[370px] relative'}>
-                <img
-                    className={'w-full absolute bottom-0 right-0 max-w-md'}
-                    src={assets.appointment_img}
-                    alt={'niggaaa'}
-                />
+
+            <div className="relative flex flex-col md:flex-row items-center justify-between gap-6 px-6 sm:px-10 md:px-14 py-10 md:py-16">
+                <div className="text-[#0C0E12]">
+                    <p className="font-['Anton'] uppercase text-3xl md:text-5xl leading-tight">
+                        Start Training
+                    </p>
+                    <p className="font-['Anton'] uppercase text-3xl md:text-5xl leading-tight">
+                        With Trusted Trainers
+                    </p>
+                </div>
+                {token && userData ? (
+                    <button
+                        onClick={() => {
+                            navigate('/trainers');
+                            window.scrollTo(0, 0);
+                        }}
+                        className="flex-shrink-0 rounded-full bg-[#0C0E12] px-8 py-3 text-sm font-semibold text-[#F5F3EE] hover:scale-105 transition-transform duration-300"
+                    >
+                        Book an Appointment
+                    </button>
+                ) : (
+                    <button
+                        onClick={() => {
+                            navigate('/login');
+                            window.scrollTo(0, 0);
+                        }}
+                        className="flex-shrink-0 rounded-full bg-[#0C0E12] px-8 py-3 text-sm font-semibold text-[#F5F3EE] hover:scale-105 transition-transform duration-300"
+                    >
+                        Konto erstellen
+                    </button>
+                )}
             </div>
         </div>
     );
 };
+
 export default Banner;

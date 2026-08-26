@@ -14,11 +14,8 @@ import { ToastContainer } from 'react-toastify';
 import Verify from './pages/Verify.jsx';
 
 const App = () => {
-    const location = useLocation();
-    const isHome = location.pathname === '/';
-
     return (
-        <div className={isHome ? '' : 'mx-4 sm:mx-[10%]'}>
+        <div>
             <ToastContainer />
             <NavBar />
             <Routes>

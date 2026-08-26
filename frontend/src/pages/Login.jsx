@@ -55,14 +55,14 @@ const Login = () => {
     return (
         <form
             onSubmit={onSubmitHandler}
-            className={'min-h-[80vh] flex items-center'}
+            className={'min-h-[80vh] flex items-center bg-[#0C0E12]'}
         >
             <div
                 className={
-                    'flex flex-col gap-3 m-auto items-start p-8 min-w-[340px] sm:min-w-96 border rounded-xl text-zinc-600 text-sm shadow-lg'
+                    'flex flex-col gap-3 m-auto items-start p-8 min-w-[340px] sm:min-w-96 border border-[#2E333B] rounded-xl bg-[#16191F] text-[#9AA0A8] text-sm shadow-lg'
                 }
             >
-                <p className={'text-2xl font-semibold'}>
+                <p className={'text-2xl font-semibold text-[#F5F3EE]'}>
                     {state === 'Sign Up' ? 'Create Account' : 'Login'}
                 </p>
                 <p>
@@ -75,7 +75,7 @@ const Login = () => {
                         <input
                             type={'text'}
                             className={
-                                'border border-zinc-300 rounded w-full p-2 mt-1'
+                                'border border-[#2E333B] bg-[#0C0E12] text-[#F5F3EE] rounded w-full p-2 mt-1 outline-none focus:border-[#FF4B2E] transition-all'
                             }
                             onChange={(e) => setName(e.target.value)}
                             value={name}
@@ -90,7 +90,7 @@ const Login = () => {
                         type={'email'}
                         onChange={(e) => setEmail(e.target.value)}
                         className={
-                            'border border-zinc-300 rounded w-full p-2 mt-1'
+                            'border border-[#2E333B] bg-[#0C0E12] text-[#F5F3EE] rounded w-full p-2 mt-1 outline-none focus:border-[#FF4B2E] transition-all'
                         }
                         value={email}
                         required={true}
@@ -102,7 +102,7 @@ const Login = () => {
                         type={'password'}
                         onChange={(e) => setPassword(e.target.value)}
                         className={
-                            'border border-zinc-300 rounded w-full p-2 mt-1'
+                            'border border-[#2E333B] bg-[#0C0E12] text-[#F5F3EE] rounded w-full p-2 mt-1 outline-none focus:border-[#FF4B2E] transition-all'
                         }
                         value={password}
                         required={true}
@@ -111,7 +111,7 @@ const Login = () => {
                 <button
                     type={'submit'}
                     className={
-                        'bg-primary text-white w-full py-2 rounded-md text-base'
+                        'bg-[#FF4B2E] text-[#0C0E12] w-full py-2 rounded-md text-base font-semibold hover:scale-[1.02] transition-transform duration-300'
                     }
                 >
                     {state === 'Sign Up' ? 'Create Account' : 'Login'}
@@ -120,7 +120,9 @@ const Login = () => {
                     <p className={''}>
                         Already have an account?{' '}
                         <span
-                            className={'text-primary underline cursor-pointer'}
+                            className={
+                                'text-[#FF4B2E] underline cursor-pointer'
+                            }
                             onClick={() => setState('Login')}
                         >
                             Login here
@@ -130,7 +132,9 @@ const Login = () => {
                     <p>
                         Create an new account?{' '}
                         <span
-                            className={'text-primary underline cursor-pointer'}
+                            className={
+                                'text-[#FF4B2E] underline cursor-pointer'
+                            }
                             onClick={() => setState('Sign Up')}
                         >
                             Click here

@@ -1,26 +1,25 @@
 import React from 'react';
 import { assets } from '../assets/assets.js';
-import emailjs from '@emailjs/browser';
 
 const About = () => {
     return (
-        <div>
-            <div className={'text-center text-2xl pt-10 text-gray-5'}>
+        <div className={'bg-[#0C0E12] sm:mx-[11%]'}>
+            <div className={'text-center text-2xl pt-10 text-[#F5F3EE]'}>
                 <p>
                     ABOUT{' '}
-                    <span className={'text-gray-700 font-medium'}>US</span>
+                    <span className={'text-[#FF4B2E] font-medium'}>US</span>
                 </p>
             </div>
 
             <div className={'my-10 flex flex-col md:flex-row gap-12'}>
                 <img
                     className={'w-full md:max-w-[460px]'}
-                    src={assets.about_image}
+                    src={assets.football_3}
                     alt={'img'}
                 />
                 <div
                     className={
-                        'flex flex-col justify-center gap-6 md:w-2/4 text-sm text-gray-600'
+                        'flex flex-col justify-center gap-6 md:w-2/4 text-sm text-[#9AA0A8]'
                     }
                 >
                     <p>
@@ -37,7 +36,7 @@ const About = () => {
                         leistungsfähiger machen. Ich bin Elite Athlete
                         Performance Coach.
                     </p>
-                    <b className={'text-gray-800'}>Our Vision</b>
+                    <b className={'text-[#F5F3EE]'}>Our Vision</b>
                     <p>
                         Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
                         sed diam nonumy eirmod tempor invidunt ut labore et
@@ -53,10 +52,10 @@ const About = () => {
                     </p>
                 </div>
             </div>
-            <div className={'text-xl my-4'}>
+            <div className={'text-xl my-4 text-[#F5F3EE]'}>
                 <p>
                     WHY{' '}
-                    <span className={'text-gray-700 font-semibold'}>
+                    <span className={'text-[#FF4B2E] font-semibold'}>
                         CHOSE US
                     </span>
                 </p>
@@ -64,11 +63,11 @@ const About = () => {
             <div className={'flex flex-col md:flex-row mb-20'}>
                 <div
                     className={
-                        'border px-10 md:px-16 py-8 sm:py-16 flex flex-col gap-5 text-[15px] hover:bg-primary hover:text-white transation-all duration-300 text-gray-600 cursor-pointer'
+                        'border border-[#2E333B] px-10 md:px-16 py-8 sm:py-16 flex flex-col gap-5 text-[15px] hover:bg-[#FF4B2E] hover:text-[#0C0E12] transation-all duration-300 text-[#9AA0A8] cursor-pointer'
                     }
                 >
                     <img
-                        src={assets.Placeholder}
+                        src={assets.football_4}
                         alt="Efficiency"
                         className="w-full h-40 object-cover rounded"
                     />
@@ -83,11 +82,11 @@ const About = () => {
                 </div>
                 <div
                     className={
-                        'border px-10 md:px-16 py-8 sm:py-16 flex flex-col gap-5 text-[15px] hover:bg-primary hover:text-white transation-all duration-300 text-gray-600 cursor-pointer'
+                        'border border-[#2E333B] px-10 md:px-16 py-8 sm:py-16 flex flex-col gap-5 text-[15px] hover:bg-[#FF4B2E] hover:text-[#0C0E12] transation-all duration-300 text-[#9AA0A8] cursor-pointer'
                     }
                 >
                     <img
-                        src={assets.Placeholder}
+                        src={assets.football_5}
                         alt="Convenience"
                         className="w-full h-40 object-cover rounded"
                     />
@@ -102,11 +101,11 @@ const About = () => {
                 </div>
                 <div
                     className={
-                        'border px-10 md:px-16 py-8 sm:py-16 flex flex-col gap-5 text-[15px] hover:bg-primary hover:text-white transation-all duration-300 text-gray-600 cursor-pointer'
+                        'border border-[#2E333B] px-10 md:px-16 py-8 sm:py-16 flex flex-col gap-5 text-[15px] hover:bg-[#FF4B2E] hover:text-[#0C0E12] transation-all duration-300 text-[#9AA0A8] cursor-pointer'
                     }
                 >
                     <img
-                        src={assets.Placeholder}
+                        src={assets.football_6}
                         alt="Personalization"
                         className="w-full h-40 object-cover rounded"
                     />

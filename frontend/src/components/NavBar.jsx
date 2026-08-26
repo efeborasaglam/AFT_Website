@@ -3,6 +3,16 @@ import { assets } from '../assets/assets.js';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/AppContext.jsx';
 
+const navLinkClass = ({ isActive }) =>
+    `py-1 uppercase text-xs tracking-wide transition-colors duration-300 ${
+        isActive ? 'text-[#FF4B2E]' : 'text-[#F5F3EE] hover:text-[#FF4B2E]'
+    }`;
+
+const mobileLinkClass = ({ isActive }) =>
+    `px-4 py-2 rounded inline-block uppercase text-sm tracking-wide ${
+        isActive ? 'text-[#FF4B2E]' : 'text-[#F5F3EE]'
+    }`;
+
 const NavBar = () => {
     const navigate = useNavigate();
 
@@ -15,14 +25,9 @@ const NavBar = () => {
         localStorage.removeItem('token');
     };
 
-    const location = useLocation();
-    const isHome = location.pathname === '/';
-
     return (
         <div
-            className={`flex item-center justify-between text-sm py-4 mb-5 border-b border-b-gray-400 mx-4 ${
-                isHome ? 'sm:mx-[11%]' : ''
-            }`}
+            className={`flex items-center justify-between text-sm py-4 mb-5 border-b border-b-[#2E333B] bg-[#0C0E12] mx-4 sm:mx-[11%]`}
         >
             <img
                 onClick={() => {
@@ -33,41 +38,21 @@ const NavBar = () => {
                 alt={'logo'}
             />
 
-            <ul className={'hidden md:flex items-start gap-5 font-medium'}>
-                <NavLink to={'/'}>
-                    <li className={'py-1'}>HOME</li>
-                    <hr
-                        className={
-                            'border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden'
-                        }
-                    />
+            <ul className={'hidden md:flex items-center gap-6 font-medium'}>
+                <NavLink to={'/'} className={navLinkClass}>
+                    <li>HOME</li>
                 </NavLink>
-                <NavLink to={'/trainers'}>
-                    <li className={'py-1'}>ALL Trainers</li>
-                    <hr
-                        className={
-                            'border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden'
-                        }
-                    />
+                <NavLink to={'/trainers'} className={navLinkClass}>
+                    <li>ALL Trainers</li>
                 </NavLink>
-                <NavLink to={'/about'}>
-                    <li className={'py-1'}>ABOUT</li>
-                    <hr
-                        className={
-                            'border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden'
-                        }
-                    />
+                <NavLink to={'/about'} className={navLinkClass}>
+                    <li>ABOUT</li>
                 </NavLink>
-                <NavLink to={'/contact'}>
-                    <li className={'py-1'}>CONTACT</li>
-                    <hr
-                        className={
-                            'border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden'
-                        }
-                    />
+                <NavLink to={'/contact'} className={navLinkClass}>
+                    <li>CONTACT</li>
                 </NavLink>
             </ul>
-            <div className={'flex item-center gap-4'}>
+            <div className={'flex items-center gap-4'}>
                 {token && userData ? (
                     <div
                         className={
@@ -77,27 +62,29 @@ const NavBar = () => {
                         <img
                             src={userData.image}
                             alt={'user'}
-                            className={'w-8 cursor-pointer'}
+                            className={
+                                'w-8 h-8 rounded-full object-cover cursor-pointer border border-[#2E333B]'
+                            }
                         />
                         <img
                             src={assets.dropdown_icon}
                             alt={'arrow'}
-                            className={'w-2.5 hidden md:flex'}
+                            className={'w-2.5 hidden md:flex invert'}
                         />
                         <div
                             className={
-                                'absolute top-0 right-0 pt-14 text-base font-medium text-gray-600 z-20 hidden group-hover:block'
+                                'absolute top-0 right-0 pt-14 text-base font-medium z-20 hidden group-hover:block'
                             }
                         >
                             <div
                                 className={
-                                    'min-w-48 bg-stone-100 rounded flex flex-col gap-4 p-4'
+                                    'min-w-48 bg-[#16191F] border border-[#2E333B] rounded-lg flex flex-col gap-4 p-4'
                                 }
                             >
                                 <NavLink to={'/my-profile'}>
                                     <p
                                         className={
-                                            'hover:text-black cursor-pointer'
+                                            'text-[#F5F3EE] hover:text-[#FF4B2E] cursor-pointer text-sm uppercase tracking-wide'
                                         }
                                     >
                                         MY PROFILE
@@ -106,7 +93,7 @@ const NavBar = () => {
                                 <NavLink to={'/my-appointments'}>
                                     <p
                                         className={
-                                            'hover:text-black cursor-pointer'
+                                            'text-[#F5F3EE] hover:text-[#FF4B2E] cursor-pointer text-sm uppercase tracking-wide'
                                         }
                                     >
                                         MY APPOINTMENTS
@@ -115,7 +102,7 @@ const NavBar = () => {
                                 <NavLink to={'/'} onClick={logout}>
                                     <p
                                         className={
-                                            'hover:text-black cursor-pointer'
+                                            'text-[#F5F3EE] hover:text-[#FF4B2E] cursor-pointer text-sm uppercase tracking-wide'
                                         }
                                     >
                                         LOGOUT
@@ -128,7 +115,7 @@ const NavBar = () => {
                     <button
                         onClick={() => navigate('/login')}
                         className={
-                            'bg-primary text-white px-8 py-3 rounded-full font-light hidden md:block'
+                            'bg-[#FF4B2E] text-[#0C0E12] px-8 py-3 rounded-full font-semibold text-sm hidden md:block hover:scale-105 transition-transform duration-300'
                         }
                     >
                         Create account
@@ -136,17 +123,17 @@ const NavBar = () => {
                 )}
                 <img
                     onClick={() => setShowMenu(true)}
-                    className={'w-6 md:hidden'}
+                    className={'w-6 md:hidden invert'}
                     alt={'menu'}
                     src={assets.menu_icon}
                 />
                 {/*    Mobile Menu  */}
                 <div
-                    className={` ${showMenu ? 'fixed w-full' : 'h-0 w-0'} md:hidden right-0 top-0 bottom-0 z-20 overflow-hidden bg-white transition-all`}
+                    className={` ${showMenu ? 'fixed w-full' : 'h-0 w-0'} md:hidden right-0 top-0 bottom-0 z-20 overflow-hidden bg-[#0C0E12] transition-all`}
                 >
                     <div
                         className={
-                            'flex items-center justify-between px-5 py-6'
+                            'flex items-center justify-between px-5 py-6 border-b border-[#2E333B]'
                         }
                     >
                         <img
@@ -155,7 +142,7 @@ const NavBar = () => {
                             alt={'logo'}
                         />
                         <img
-                            className={'w-7'}
+                            className={'w-7 invert'}
                             onClick={() => setShowMenu(false)}
                             src={assets.cross_icon}
                             alt={'logo'}
@@ -166,35 +153,33 @@ const NavBar = () => {
                             'flex flex-col items-center gap-2 mt-5 px-5 text-lg font-medium'
                         }
                     >
-                        <NavLink onClick={() => setShowMenu(false)} to={'/'}>
-                            <p className={'px-4 py-2 rounded inline-block'}>
-                                HOME
-                            </p>
+                        <NavLink
+                            onClick={() => setShowMenu(false)}
+                            to={'/'}
+                            className={mobileLinkClass}
+                        >
+                            HOME
                         </NavLink>
                         <NavLink
                             onClick={() => setShowMenu(false)}
                             to={'/trainers'}
+                            className={mobileLinkClass}
                         >
-                            <p className={'px-4 py-2 rounded inline-block'}>
-                                {' '}
-                                ALL Trainers
-                            </p>
+                            ALL Trainers
                         </NavLink>
                         <NavLink
                             onClick={() => setShowMenu(false)}
                             to={'/about'}
+                            className={mobileLinkClass}
                         >
-                            <p className={'px-4 py-2 rounded inline-block'}>
-                                ABOUT
-                            </p>
+                            ABOUT
                         </NavLink>
                         <NavLink
                             onClick={() => setShowMenu(false)}
                             to={'/contact'}
+                            className={mobileLinkClass}
                         >
-                            <p className={'px-4 py-2 rounded inline-block'}>
-                                CONTACT
-                            </p>
+                            CONTACT
                         </NavLink>
                         {token && userData ? (
                             <>
@@ -204,7 +189,7 @@ const NavBar = () => {
                                 >
                                     <p
                                         className={
-                                            'hover:text-black cursor-pointer'
+                                            'text-[#F5F3EE] hover:text-[#FF4B2E] cursor-pointer'
                                         }
                                     >
                                         MY PROFILE
@@ -216,7 +201,7 @@ const NavBar = () => {
                                 >
                                     <p
                                         className={
-                                            'hover:text-black cursor-pointer'
+                                            'text-[#F5F3EE] hover:text-[#FF4B2E] cursor-pointer'
                                         }
                                     >
                                         MY APPOINTMENTS
@@ -232,7 +217,7 @@ const NavBar = () => {
                                 >
                                     <p
                                         className={
-                                            'hover:text-white text-white cursor-pointer mt-15 bg-red-500 p-3'
+                                            'text-[#0C0E12] cursor-pointer mt-10 bg-[#FF4B2E] px-6 py-3 rounded-full font-semibold'
                                         }
                                     >
                                         LOGOUT
@@ -248,7 +233,7 @@ const NavBar = () => {
                             >
                                 <p
                                     className={
-                                        'bg-primary text-white px-8 py-3 mt-15 rounded-full font-light'
+                                        'bg-[#FF4B2E] text-[#0C0E12] px-8 py-3 mt-10 rounded-full font-semibold'
                                     }
                                 >
                                     Create account

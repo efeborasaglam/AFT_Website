@@ -101,31 +101,35 @@ const MyAppointments = () => {
     }, [token]);
 
     return (
-        <div>
-            <p className={'pb-3 mt-12 font-medium text-zinc-700 border-b'}>
+        <div className={'sm:mx-[11%] bg-[#0C0E12]'}>
+            <p
+                className={
+                    'pb-3 mt-12 font-medium text-[#F5F3EE] border-b border-[#2E333B]'
+                }
+            >
                 My Appointments
             </p>
             <div>
                 {appointments.map((item, index) => (
                     <div
                         className={
-                            'grid grid-cols-[1fr_2fr] gap-4 sm:flex sm:gap-6 py-2 border-b'
+                            'grid grid-cols-[1fr_2fr] gap-4 sm:flex sm:gap-6 py-2 border-b border-[#2E333B]'
                         }
                         key={index}
                     >
                         <div>
                             <img
-                                className={'w-32 bg-indigo-50'}
+                                className={'w-32 bg-[#16191F]'}
                                 src={item.docData.image}
                                 alt={'dco'}
                             />
                         </div>
-                        <div className={'flex-1 text-sm text-zinc-600'}>
-                            <p className={'text-neutral-800 font-semibold'}>
+                        <div className={'flex-1 text-sm text-[#9AA0A8]'}>
+                            <p className={'text-[#F5F3EE] font-semibold'}>
                                 {item.docData.name}
                             </p>
                             <p>{item.speciality}</p>
-                            <p className={'text-zinc-700 font-medium mt-1'}>
+                            <p className={'text-[#F5F3EE] font-medium mt-1'}>
                                 Address:{' '}
                             </p>
                             <p className={'text-xs'}>
@@ -137,7 +141,7 @@ const MyAppointments = () => {
                             <p className={'text-xs mt-1'}>
                                 <span
                                     className={
-                                        'text-sm mt-1 text-neutral-700 font-medium'
+                                        'text-sm mt-1 text-[#F5F3EE] font-medium'
                                     }
                                 >
                                     Date & Time:
@@ -153,7 +157,7 @@ const MyAppointments = () => {
                                 !item.isCompleted && (
                                     <button
                                         className={
-                                            'sm:min-w-48 py-2 border rounded text-stone-500 bg-indigo-50'
+                                            'sm:min-w-48 py-2 border border-[#2E333B] rounded text-[#9AA0A8] bg-[#16191F]'
                                         }
                                     >
                                         Paid
@@ -164,7 +168,7 @@ const MyAppointments = () => {
                                 !item.isCompleted && (
                                     <button
                                         className={
-                                            'text-sm text-stone-500 text-center sm:min-w-48 py-2 border hover:bg-primary hover:text-white transition-all duration-300'
+                                            'text-sm text-[#9AA0A8] text-center sm:min-w-48 py-2 border border-[#2E333B] hover:bg-[#FF4B2E] hover:text-[#0C0E12] hover:border-[#FF4B2E] transition-all duration-300'
                                         }
                                         onClick={() =>
                                             AppointmentStripe(item._id)
@@ -177,7 +181,7 @@ const MyAppointments = () => {
                             {!item.cancel && !item.isCompleted && (
                                 <button
                                     className={
-                                        'text-sm text-stone-500 text-center sm:min-w-48 py-2 border hover:bg-red-600 hover:text-white transition-all duration-300'
+                                        'text-sm text-[#9AA0A8] text-center sm:min-w-48 py-2 border border-[#2E333B] hover:bg-red-600 hover:text-white hover:border-red-600 transition-all duration-300'
                                     }
                                     onClick={() => cancelAppointment(item._id)}
                                 >
@@ -187,7 +191,7 @@ const MyAppointments = () => {
                             {item.cancel && !item.isCompleted && (
                                 <button
                                     className={
-                                        'sm:nub-w-48 py-2 border border-red-500 py-2 rounded text-red-500'
+                                        'sm:min-w-48 py-2 border border-red-500 rounded text-red-500'
                                     }
                                 >
                                     Appointment cancelled

@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AppContext } from '../context/AppContext.jsx';
 import { assets } from '../assets/assets.js';
-import RelatedDoctors from '../components/RelatedDoctors.jsx';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
@@ -184,13 +183,13 @@ const Appointment = () => {
 
     return (
         docInfo && (
-            <div>
+            <div className={'sm:mx-[11%] bg-[#0C0E12]'}>
                 {/*   Doctor Details */}
                 <div className={'flex flex-col sm:flex-row gap-4'}>
                     <div>
                         <img
                             className={
-                                'bg-primary w-full sm:max-w-72 rounded-lg'
+                                'bg-[#16191F] w-full sm:max-w-72 rounded-lg'
                             }
                             src={docInfo.image}
                             alt={'image'}
@@ -198,13 +197,13 @@ const Appointment = () => {
                     </div>
                     <div
                         className={
-                            'flex-1 border border-gray-400 rounded-lg p-8 py-7 bg-white mx-2 sm:mx-0 mt-[-80px] sm:mt-0'
+                            'flex-1 border border-[#2E333B] rounded-lg p-8 py-7 bg-[#16191F] mx-2 sm:mx-0 mt-[-80px] sm:mt-0'
                         }
                     >
                         {/*  Doc Info : name, degree. experience  */}
                         <p
                             className={
-                                'flex items-center gap-2 text-2xl font-medium text-gray-900'
+                                'flex items-center gap-2 text-2xl font-medium text-[#F5F3EE]'
                             }
                         >
                             {docInfo.name}{' '}
@@ -216,7 +215,7 @@ const Appointment = () => {
                         </p>
                         <div
                             className={
-                                'flex items-center gap-2 text-sm text-gray-600 mt-1'
+                                'flex items-center gap-2 text-sm text-[#9AA0A8] mt-1'
                             }
                         >
                             <p>
@@ -225,7 +224,7 @@ const Appointment = () => {
                             </p>
                             <button
                                 className={
-                                    'py-0.5 px-2 border text-xs rounded-full'
+                                    'py-0.5 px-2 border border-[#2E333B] text-xs rounded-full'
                                 }
                             >
                                 {docInfo.experience}
@@ -236,7 +235,7 @@ const Appointment = () => {
                             <div className={'mt-3'}>
                                 <p
                                     className={
-                                        'text-sm text-gray-700 font-medium mb-1'
+                                        'text-sm text-[#F5F3EE] font-medium mb-1'
                                     }
                                 >
                                     Select speciality for this appointment
@@ -247,7 +246,7 @@ const Appointment = () => {
                                         setSelectedSpeciality(e.target.value)
                                     }
                                     className={
-                                        'border rounded px-3 py-1.5 text-sm text-gray-700'
+                                        'border border-[#2E333B] bg-[#0C0E12] rounded px-3 py-1.5 text-sm text-[#F5F3EE]'
                                     }
                                 >
                                     {docInfo.speciality.map((s) => (
@@ -263,7 +262,7 @@ const Appointment = () => {
                         <div>
                             <p
                                 className={
-                                    'flex items-center gap-1 text-sm font-medium text-gray-900 mt-3'
+                                    'flex items-center gap-1 text-sm font-medium text-[#F5F3EE] mt-3'
                                 }
                             >
                                 About
@@ -271,15 +270,15 @@ const Appointment = () => {
                             </p>
                             <p
                                 className={
-                                    'text-sm text-gray-500 max-w-[700px] mt-1'
+                                    'text-sm text-[#9AA0A8] max-w-[700px] mt-1'
                                 }
                             >
                                 {docInfo.about}
                             </p>
                         </div>
-                        <p className={'text-gray-500 font-medium mt-5'}>
+                        <p className={'text-[#9AA0A8] font-medium mt-5'}>
                             Appointment fee :{' '}
-                            <span className={'text-gray-600'}>
+                            <span className={'text-[#F5F3EE]'}>
                                 {currencySymbol}
                                 {docInfo.fees}
                             </span>
@@ -291,7 +290,7 @@ const Appointment = () => {
 
                 <div
                     className={
-                        'sm:ml-72 sm:pl-4 mt-4 font-medium text-gray-700'
+                        'sm:ml-72 sm:pl-4 mt-4 font-medium text-[#F5F3EE]'
                     }
                 >
                     <p>Booking slots</p>
@@ -304,7 +303,7 @@ const Appointment = () => {
                             docSlots.map((item, index) => (
                                 <div
                                     onClick={() => setSlotIndex(index)}
-                                    className={`text-center py-6 min-w-16 rounded-full cursor-pointer ${slotIndex === index ? 'bg-primary text-white' : 'bg-white text-black border border-gray-400 '}`}
+                                    className={`text-center py-6 min-w-16 rounded-full cursor-pointer ${slotIndex === index ? 'bg-[#FF4B2E] text-[#0C0E12]' : 'bg-[#16191F] text-[#F5F3EE] border border-[#2E333B]'}`}
                                 >
                                     <p>
                                         {item[0] &&
@@ -327,7 +326,7 @@ const Appointment = () => {
                             docSlots[slotIndex].map((item, index) => (
                                 <p
                                     onClick={() => setSlotTime(item.time)}
-                                    className={`text-sm font-light flex-shrink-0 px-5 py-2 rounded-full cursor-pointer ${item.time === slotTime ? 'bg-primary text-white' : 'text-gray-400 border border-gray-300'}`}
+                                    className={`text-sm font-light flex-shrink-0 px-5 py-2 rounded-full cursor-pointer ${item.time === slotTime ? 'bg-[#FF4B2E] text-[#0C0E12]' : 'text-[#9AA0A8] border border-[#2E333B]'}`}
                                     key={index}
                                 >
                                     {item.time.toLowerCase()}
@@ -337,14 +336,14 @@ const Appointment = () => {
                     <button
                         onClick={bookAppointment}
                         className={
-                            'bg-primary text-white text-sm font-light px-14 py-3 rounded-fully my-6'
+                            'bg-[#FF4B2E] text-[#0C0E12] text-sm font-semibold px-14 py-3 rounded-full my-6 hover:scale-[1.02] transition-transform duration-300'
                         }
                     >
                         Book an appointment
                     </button>
                 </div>
                 {/*    Listing related doctors */}
-                <RelatedDoctors docId={docId} speciality={docInfo.speciality} />
+                {/*<RelatedDoctors docId={docId} speciality={docInfo.speciality} />*/}
             </div>
         )
     );
