@@ -24,31 +24,24 @@ const About = () => {
                 >
                     <p>
                         Ich habe sieben Jahre beim Grasshopper Club Zürich
-                        gespielt und die Nachwuchsabteilungen von der U15 bis
-                        zur U21 durchlaufen. Mein Ziel war es, Profifussballer
-                        zu werden. Rückblickend bin ich überzeugt, dass ich den
-                        letzten Schritt in den Profifussball unter anderem
-                        aufgrund fehlender Athletik nicht geschafft habe. Diese
-                        Erfahrung ist die Motivation hinter AFT Performance.
-                        Heute möchte ich vor allem junge Fussballathleten, aber
-                        auch ambitionierte Erwachsene und langfristig Leistungs-
-                        und Profifussballer schneller, explosiver und
-                        leistungsfähiger machen. Ich bin Elite Athlete
-                        Performance Coach.
+                        gespielt und dabei die Nachwuchsabteilungen von der U15
+                        bis zur U21 durchlaufen. Mein Ziel war der Profifussball
+                        – doch rückblickend fehlte mir unter anderem die
+                        notwendige Athletik für den letzten Schritt. Diese
+                        Erfahrung hat AFT Performance geprägt. Heute nutze ich
+                        mein Wissen als Elite Athlete Performance Coach, um
+                        junge Fussballer und ambitionierte Athleten schneller,
+                        explosiver und leistungsfähiger zu machen.
                     </p>
                     <b className={'text-[#F5F3EE]'}>Our Vision</b>
                     <p>
-                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                        sed diam nonumy eirmod tempor invidunt ut labore et
-                        dolore magna aliquyam erat, sed diam voluptua. At vero
-                        eos et accusam et justo duo dolores et ea rebum. Stet
-                        clita kasd gubergren, no sea takimata sanctus est Lorem
-                        ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-                        consetetur sadipscing elitr, sed diam nonumy eirmod
-                        tempor invidunt ut labore et dolore magna aliquyam erat,
-                        sed diam voluptua. At vero eos et accusam et justo duo
-                        dolores et ea rebum. Stet clita kasd gubergren, no sea
-                        takimata sanctus est Lorem ipsum dolor sit amet.
+                        Unsere Vision ist es, Athleten gezielt dabei zu
+                        unterstützen, ihr körperliches Potenzial auszuschöpfen
+                        und ihre sportliche Leistung nachhaltig zu verbessern.
+                        Mit professionellem Athletiktraining, individueller
+                        Betreuung und modernen Trainingskonzepten möchten wir
+                        Athleten auf das nächste Level bringen – vom
+                        Nachwuchsspieler bis zum ambitionierten Erwachsenen.
                     </p>
                 </div>
             </div>
@@ -73,11 +66,10 @@ const About = () => {
                     />
                     <b>EFFICIENCY:</b>
                     <p>
-                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                        sed diam nonumy eirmod tempor invidunt ut labore et
-                        dolore magna aliquyam erat, sed diam voluptua. At vero
-                        eos et accusam et justo duo dolores et ea rebum. Stet
-                        clita kasd gubergren,
+                        Effektives Athletiktraining mit einem klaren Ziel:
+                        bessere Leistung in kürzerer Zeit. Jede Trainingseinheit
+                        konzentriert sich auf die Fähigkeiten, die für den
+                        jeweiligen Athleten wirklich entscheidend sind.
                     </p>
                 </div>
                 <div
@@ -92,11 +84,11 @@ const About = () => {
                     />
                     <b>CONVIENCE:</b>
                     <p>
-                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                        sed diam nonumy eirmod tempor invidunt ut labore et
-                        dolore magna aliquyam erat, sed diam voluptua. At vero
-                        eos et accusam et justo duo dolores et ea rebum. Stet
-                        clita kasd gubergren,
+                        Training soll sich einfach in den Alltag integrieren
+                        lassen. Mit Online-Buchung, flexiblen Trainingsangeboten
+                        und zukünftig digitalen Programmen ermöglichen wir einen
+                        unkomplizierten Zugang zu professionellem
+                        Athletiktraining.
                     </p>
                 </div>
                 <div
@@ -111,11 +103,11 @@ const About = () => {
                     />
                     <b>PERSONILATION</b>
                     <p>
-                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                        sed diam nonumy eirmod tempor invidunt ut labore et
-                        dolore magna aliquyam erat, sed diam voluptua. At vero
-                        eos et accusam et justo duo dolores et ea rebum. Stet
-                        clita kasd gubergren,
+                        Jeder Athlet ist unterschiedlich. Deshalb werden
+                        Trainingsinhalte und Belastungen an Alter,
+                        Leistungsstand, Ziele und individuelle Bedürfnisse
+                        angepasst – für eine gezielte und nachhaltige
+                        Entwicklung.
                     </p>
                 </div>
             </div>

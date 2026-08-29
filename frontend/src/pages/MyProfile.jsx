@@ -212,6 +212,9 @@ const MyProfile = () => {
                                 }
                                 value={userData.gender}
                             >
+                                <option value={'Not Selected'} disabled>
+                                    Not Selected
+                                </option>
                                 <option value={'Male'}>Male</option>
                                 <option value={'Female'}>Female</option>
                             </select>

@@ -28,6 +28,12 @@ import football_5 from './football_5.jpeg';
 import football_6 from './football_6.jpeg';
 import football_7 from './football_7.jpeg';
 import football_8 from './football_8.jpeg';
+import video_1 from './video_1.MP4';
+import video_2 from './video_2.MP4';
+import video_3 from './video_3.MP4';
+import video_4 from './video_4.MP4';
+import video_5 from './video_5.MP4';
+import video_6 from './video_6.MP4';
 
 export const assets = {
     appointment_img,
@@ -56,6 +62,15 @@ export const assets = {
     football_6,
     football_7,
     football_8,
+};
+
+export const videos = {
+    video_1,
+    video_2,
+    video_3,
+    video_4,
+    video_5,
+    video_6,
 };
 
 export const specialityData = [

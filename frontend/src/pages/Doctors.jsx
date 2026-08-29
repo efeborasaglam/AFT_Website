@@ -1,33 +1,56 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/AppContext.jsx';
-import { assets } from '../assets/assets.js';
+import { assets, videos } from '../assets/assets.js';
 
 const Doctors = () => {
     const { doctors } = useContext(AppContext);
     const navigate = useNavigate();
     const [openIndex, setOpenIndex] = useState(null);
 
+    // --- Video slider state ---
+    const videoList = Object.values(videos); // [video_1, ..., video_6]
+    const [currentVideo, setCurrentVideo] = useState(0);
+    const [direction, setDirection] = useState('right'); // controls slide direction
+    const videoRef = useRef(null);
+
+    const goToVideo = (index, dir) => {
+        setDirection(dir);
+        setCurrentVideo(index);
+    };
+
+    const handlePrev = () => {
+        const newIndex =
+            currentVideo === 0 ? videoList.length - 1 : currentVideo - 1;
+        goToVideo(newIndex, 'left');
+    };
+
+    const handleNext = () => {
+        const newIndex =
+            currentVideo === videoList.length - 1 ? 0 : currentVideo + 1;
+        goToVideo(newIndex, 'right');
+    };
+
     const specialities = [
         {
             title: 'Athletik-Einzeltrainings',
             description:
-                'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do',
+                'Individuell abgestimmte Athletiktrainings, die gezielt an Schnelligkeit, Explosivität, Kraft und Beweglichkeit arbeiten. Das Training wird auf die persönlichen Ziele und den aktuellen Leistungsstand des Athleten angepasst.',
         },
         {
             title: 'Athletik-Gruppentraining',
             description:
-                'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do',
+                'Professionelles Athletiktraining in kleinen Gruppen mit Fokus auf Schnelligkeit, Explosivität, Kraft und Ausdauer. Die Trainings sind speziell auf Fussballer und ambitionierte Athleten verschiedener Alters- und Leistungsstufen ausgerichtet.',
         },
         {
             title: 'Online-Coaching',
             description:
-                'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do',
+                'Individuelle Betreuung unabhängig vom Standort mit persönlichen Trainingsplänen, regelmässiger Kommunikation und professioneller Begleitung. Das Training kann flexibel in den eigenen Alltag integriert und kontinuierlich angepasst werden.',
         },
         {
             title: 'Digitale-Programme',
             description:
-                'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do',
+                'Strukturierte Trainingsprogramme, die jederzeit online verfügbar sind und selbstständig absolviert werden können. Die Programme bieten klare Trainingspläne und Übungen für Athleten, die ihre Leistungsfähigkeit gezielt verbessern möchten.',
         },
     ];
 
@@ -130,6 +153,84 @@ const Doctors = () => {
                             </div>
                         </div>
                     ))}
+                </div>
+            </div>
+
+            {/* --- Video Slider Section --- */}
+            <div className="relative mt-24">
+                <span className="font-mono text-xs tracking-[0.3em] text-[#C8FF3D] uppercase">
+                    Impressionen
+                </span>
+                <h2
+                    className={
+                        "font-['Anton'] uppercase text-3xl sm:text-4xl text-[#F5F3EE] leading-[0.95] mt-3 mb-8"
+                    }
+                >
+                    Training In <span className="text-[#FF4B2E]">Action</span>
+                </h2>
+
+                <div className="relative w-full max-w-4xl mx-auto">
+                    {/* Video viewport */}
+                    <div
+                        className="relative rounded-xl overflow-hidden bg-[#16191F] aspect-video"
+                        style={{
+                            clipPath: 'polygon(4% 0, 100% 0, 100% 96%, 0 100%)',
+                        }}
+                    >
+                        <video
+                            key={currentVideo}
+                            ref={videoRef}
+                            src={videoList[currentVideo]}
+                            controls
+                            autoPlay
+                            muted
+                            playsInline
+                            className={`w-full h-full object-cover transition-all duration-500 ease-in-out ${
+                                direction === 'right'
+                                    ? 'animate-slide-in-right'
+                                    : 'animate-slide-in-left'
+                            }`}
+                        />
+
+                        {/* Prev arrow */}
+                        <button
+                            onClick={handlePrev}
+                            aria-label="Vorheriges Video"
+                            className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[#0C0E12]/70 border border-[#2E333B] text-[#F5F3EE] text-xl flex items-center justify-center hover:bg-[#FF4B2E] hover:text-[#0C0E12] transition-colors duration-300"
+                        >
+                            ‹
+                        </button>
+
+                        {/* Next arrow */}
+                        <button
+                            onClick={handleNext}
+                            aria-label="Nächstes Video"
+                            className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[#0C0E12]/70 border border-[#2E333B] text-[#F5F3EE] text-xl flex items-center justify-center hover:bg-[#FF4B2E] hover:text-[#0C0E12] transition-colors duration-300"
+                        >
+                            ›
+                        </button>
+                    </div>
+
+                    {/* Dots / thumbnails navigation */}
+                    <div className="flex items-center justify-center gap-3 mt-6">
+                        {videoList.map((_, index) => (
+                            <button
+                                key={index}
+                                onClick={() =>
+                                    goToVideo(
+                                        index,
+                                        index > currentVideo ? 'right' : 'left'
+                                    )
+                                }
+                                aria-label={`Video ${index + 1} anzeigen`}
+                                className={`h-2 rounded-full transition-all duration-300 ${
+                                    index === currentVideo
+                                        ? 'w-8 bg-[#FF4B2E]'
+                                        : 'w-2 bg-[#2E333B] hover:bg-[#9AA0A8]'
+                                }`}
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
 

@@ -66,7 +66,7 @@ const Header = () => {
                         />
                     </div>
                     <div className="absolute -bottom-4 -left-4 bg-[#C8FF3D] text-[#0C0E12] rounded-xl px-5 py-3 font-mono text-xs uppercase tracking-wide shadow-lg">
-                        200+ Athleten gecoacht
+                        Zahlreichen Athleten gecoacht
                     </div>
                 </div>
             </div>
