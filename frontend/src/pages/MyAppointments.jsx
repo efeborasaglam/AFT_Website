@@ -5,7 +5,8 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 const MyAppointments = () => {
-    const { backendUrl, token, getDoctorsData } = useContext(AppContext);
+    const { backendUrl, token, getDoctorsData, slotDateFormate } =
+        useContext(AppContext);
 
     const navigate = useNavigate();
 
@@ -26,16 +27,11 @@ const MyAppointments = () => {
         'Dec',
     ];
 
-    const slotDateFormate = (slotDate) => {
-        const dateArray = slotDate.split('_');
-        return (
-            dateArray[0] +
-            ' ' +
-            months[Number(dateArray[1])] +
-            ' ' +
-            dateArray[2]
-        );
-    };
+    // slotDate kommt jetzt als "YYYY-MM-DD" aus dem gebuchten Availability-Block
+    // const slotDateFormate = (slotDate) => {
+    //     const [year, month, day] = slotDate.split('-');
+    //     return `${Number(day)} ${months[Number(month)]} ${year}`;
+    // };
 
     const getUserAppointments = async () => {
         try {
@@ -74,11 +70,10 @@ const MyAppointments = () => {
         }
     };
 
-    // Stripe: statt Popup wird der User auf die von Stripe gehostete Checkout-Seite weitergeleitet
     const AppointmentStripe = async (appointmentId) => {
         try {
             const { data } = await axios.post(
-                backendUrl + '/api/user/payment-razorpay', // Route-Pfad bleibt laut Tutorial gleich
+                backendUrl + '/api/user/payment-razorpay',
                 { appointmentId },
                 { headers: { token } }
             );
@@ -128,7 +123,15 @@ const MyAppointments = () => {
                             <p className={'text-[#F5F3EE] font-semibold'}>
                                 {item.docData.name}
                             </p>
-                            <p>{item.speciality}</p>
+                            <p>
+                                {item.speciality}
+                                {item.ageGroup && (
+                                    <span className={'text-xs text-[#9AA0A8]'}>
+                                        {' '}
+                                        · {item.ageGroup}
+                                    </span>
+                                )}
+                            </p>
                             <p className={'text-[#F5F3EE] font-medium mt-1'}>
                                 Address:{' '}
                             </p>
@@ -148,6 +151,9 @@ const MyAppointments = () => {
                                 </span>{' '}
                                 {slotDateFormate(item.slotDate)} |{' '}
                                 {item.slotTime}
+                                {item.slotEndTime
+                                    ? ` - ${item.slotEndTime}`
+                                    : ''}
                             </p>
                         </div>
                         <div></div>

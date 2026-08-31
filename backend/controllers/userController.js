@@ -121,76 +121,69 @@ const updateProfile = async (req, res) => {
 // API to book appointment
 // API to book appointment
 const bookAppointment = async (req, res) => {
-    try{
+    try {
+        const {userId, docId, availabilityId} = req.body
 
-        const {userId, docId, slotDate, slotTime, speciality} = req.body
-
-        if (!speciality){
-            return res.json({success: false, message: "Please select a speciality"})
+        if (!availabilityId) {
+            return res.json({success: false, message: "Bitte einen Termin auswählen"})
         }
 
-        const docDataDoc = await doctorModel.findById(docId).select('-password')
-
-        if (!docDataDoc){
+        const docDataDoc = await doctorModel.findById(docId)
+        if (!docDataDoc) {
             return res.json({success: false, message: "Doctor not found"})
         }
-
-        if (!docDataDoc.available){
+        if (!docDataDoc.available) {
             return res.json({success: false, message: "Doctor not available"})
         }
 
-        if (!docDataDoc.speciality.includes(speciality)){
-            return res.json({success: false, message: "Invalid speciality for this doctor"})
+        const block = docDataDoc.availability.id(availabilityId)
+        if (!block) {
+            return res.json({success: false, message: "Dieser Termin existiert nicht mehr"})
         }
-
-        let slots_booked = docDataDoc.slots_booked
-
-        if (slots_booked[slotDate]){
-            if (slots_booked[slotDate].includes(slotTime)){
-                return res.json({success: false, message: "Slot already booked"})
-            }else {
-                slots_booked[slotDate].push(slotTime)
-            }
-        }else {
-            slots_booked[slotDate] = []
-            slots_booked[slotDate].push(slotTime)
+        if (block.bookedCount >= block.maxParticipants) {
+            return res.json({success: false, message: "Dieser Termin ist bereits ausgebucht"})
         }
 
         const userDataDoc = await userModel.findById(userId).select('-password')
-
-        if (!userDataDoc){
+        if (!userDataDoc) {
             return res.json({success: false, message: "User not found"})
         }
 
         const docData = docDataDoc.toObject()
         const userData = userDataDoc.toObject()
-
+        delete docData.password
         delete docData.slots_booked
+        delete docData.availability
 
         const appointmentData = {
             userId,
             docId,
-            speciality,
+            availabilityId,
+            speciality: block.speciality,
+            ageGroup: block.ageGroup,
+            slotDate: block.date,
+            slotTime: block.startTime,
+            slotEndTime: block.endTime,
             userData,
             docData,
-            amount: docData.fees,
-            slotTime,
-            slotDate,
+            amount: docDataDoc.fees,
             date: Date.now()
         }
 
         const newAppointment = new appointmentModel(appointmentData)
         await newAppointment.save()
 
-        await doctorModel.findByIdAndUpdate(docId, {slots_booked})
+        block.bookedCount += 1
+        await docDataDoc.save()
 
-        res.json({success:true,message:'Appointment Booked'})
+        res.json({success: true, message: 'Appointment Booked'})
 
-    }catch (e) {
+    } catch (e) {
         console.log(e)
         res.json({success: false, message: e.message + "Something went wrong"})
     }
 }
+
 // API to get user appointments for frontend my-appointment page
 const listAppointment = async (req, res) => {
     try{
@@ -207,31 +200,29 @@ const listAppointment = async (req, res) => {
 }
 
 const deleteAppointment = async (req, res) => {
-    try{
-
+    try {
         const {userId, appointmentId} = req.body;
 
         const appointmentData = await appointmentModel.findById(appointmentId)
 
-        if (appointmentData.userId !== userId){
-            return res.json({success:false, message:'Unauthorized action'})
+        if (appointmentData.userId !== userId) {
+            return res.json({success: false, message: 'Unauthorized action'})
         }
 
-        await appointmentModel.findByIdAndUpdate(appointmentId, {cancel: true})
+        if (!appointmentData.cancel) {
+            await appointmentModel.findByIdAndUpdate(appointmentId, {cancel: true})
 
-        const {docId, slotDate, slotTime} = appointmentData
+            const doctorData = await doctorModel.findById(appointmentData.docId)
+            const block = doctorData?.availability?.id(appointmentData.availabilityId)
+            if (block && block.bookedCount > 0) {
+                block.bookedCount -= 1
+                await doctorData.save()
+            }
+        }
 
-        const doctorData = await doctorModel.findById(docId)
+        res.json({success: true, message: 'Appointment Cancelled'})
 
-        let slots_booked = doctorData.slots_booked
-
-        slots_booked[slotDate] = slots_booked[slotDate].filter(e => e !== slotTime)
-
-        await doctorModel.findByIdAndUpdate(docId, {slots_booked})
-
-        res.json({success:true, message:'Appointment Cancelled'})
-
-    }catch (e) {
+    } catch (e) {
         console.log(e)
         res.json({success: false, message: e.message + "Something went wrong"})
     }

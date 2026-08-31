@@ -4,6 +4,22 @@ import { toast } from 'react-toastify';
 
 export const AppContext = createContext();
 
+const months = [
+    ' ',
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'June',
+    'July',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+];
+
 const AppContextProvider = (props) => {
     const currencySymbol = 'CHF';
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
@@ -47,10 +63,19 @@ const AppContextProvider = (props) => {
         }
     };
 
+    // slotDate kommt jetzt immer als "YYYY-MM-DD" aus dem Availability-Block
+    const slotDateFormate = (slotDate) => {
+        if (!slotDate) return '';
+        const [year, month, day] = slotDate.split('-');
+        return `${Number(day)} ${months[Number(month)]} ${year}`;
+    };
+
     const value = {
         doctors,
         getDoctorsData,
         currencySymbol,
+        currency: currencySymbol, // Alias, weil manche Komponenten "currency" erwarten
+        slotDateFormate,
         token,
         setToken,
         backendUrl,

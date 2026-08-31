@@ -96,7 +96,16 @@ const appointmentCancelDoc = async (req, res) => {
         const appointmentData = await appointmentModel.findById(appointmentId)
 
         if (appointmentData && appointmentData.docId === docId) {
-            await appointmentModel.findByIdAndUpdate(appointmentId, {cancel: true})
+            if (!appointmentData.cancel) {
+                await appointmentModel.findByIdAndUpdate(appointmentId, {cancel: true})
+
+                const doctorData = await doctorModel.findById(docId)
+                const block = doctorData.availability.id(appointmentData.availabilityId)
+                if (block && block.bookedCount > 0) {
+                    block.bookedCount -= 1
+                    await doctorData.save()
+                }
+            }
             return res.json({success: true, message: 'Appointment cancelled'})
         } else {
             return res.json({success: false, message: 'Appointment could not be cancelled'})
@@ -106,7 +115,6 @@ const appointmentCancelDoc = async (req, res) => {
         res.json({success: false, message: e.message + "Something went wrong"})
     }
 }
-
 // DAshboard
 const doctorDashboard = async (req, res) => {
     try {
@@ -182,12 +190,16 @@ const updateAvailability = async (req, res) => {
 
         const doctorData = await doctorModel.findById(docId)
 
-        // nur Specialities zulassen, die der Doctor tatsächlich hat
-        const invalidEntry = availability.find(
-            (a) => !doctorData.speciality.includes(a.speciality)
-        )
-        if (invalidEntry) {
-            return res.json({ success: false, message: `Speciality "${invalidEntry.speciality}" gehört nicht zu deinem Profil` })
+        for (const a of availability) {
+            if (!doctorData.speciality.includes(a.speciality)) {
+                return res.json({ success: false, message: `Speciality "${a.speciality}" gehört nicht zu deinem Profil` })
+            }
+            if (!a.maxParticipants || a.maxParticipants < 1) {
+                return res.json({ success: false, message: "Maximale Teilnehmerzahl muss mindestens 1 sein" })
+            }
+            if (a.bookedCount && a.bookedCount > a.maxParticipants) {
+                return res.json({ success: false, message: `Es sind bereits ${a.bookedCount} Teilnehmer gebucht – die maximale Teilnehmerzahl darf nicht darunter liegen` })
+            }
         }
 
         await doctorModel.findByIdAndUpdate(docId, { availability })

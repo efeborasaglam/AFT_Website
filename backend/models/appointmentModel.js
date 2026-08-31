@@ -3,18 +3,20 @@ import mongoose from "mongoose"
 const appointmentSchema = new mongoose.Schema({
     userId: {type: String, required: true},
     docId: {type: String, required: true},
+    availabilityId: {type: String, required: true}, // welcher Slot wurde gebucht
     slotDate: {type: String, required: true},
-    slotTime: {type: String, required: true},
+    slotTime: {type: String, required: true},        // Startzeit des Blocks
+    slotEndTime: {type: String, required: true},      // Endzeit des Blocks
     speciality: {type: String, required: true},
+    ageGroup: {type: String, default: ""},
     userData: {type: Object, required: true},
     docData: {type: Object, required: true},
     amount: {type: Number, required: true},
-    date: {type: Number, required:true},
+    date: {type: Number, required: true},
     cancel: {type: Boolean, default: false},
     payment: {type: Boolean, default: false},
     isCompleted: {type: Boolean, default: false},
 })
 
 const appointmentModel = mongoose.models.appointment || mongoose.model('appointment', appointmentSchema)
-
 export default appointmentModel

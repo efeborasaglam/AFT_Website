@@ -26,10 +26,8 @@ const toDateStr = (d) => {
   const day = String(d.getDate()).padStart(2, "0");
   return `${y}-${m}-${day}`;
 };
-
 const toTimeStr = (date) => date.toTimeString().slice(0, 5);
 
-// fragt den Doctor nach Start-/Endzeit (für Monatsansicht, wo keine Uhrzeit gezogen wird)
 const promptTimeRange = () => {
   let start = window.prompt("Startzeit (HH:MM)", "09:00");
   if (start === null) return null;
@@ -50,6 +48,11 @@ const promptTimeRange = () => {
   return { startTime: start, endTime: end };
 };
 
+// stabiler Key: echte _id (aus DB) oder temporäre Client-ID für neue, ungespeicherte Blöcke
+const getEntryKey = (a) => a._id || a._tmpId;
+const makeTmpId = () =>
+  `tmp_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+
 const DoctorProfile = () => {
   const { dToken, profileData, setProfileData, getProfileData, backendUrl } =
     useContext(DoctorContext);
@@ -58,6 +61,8 @@ const DoctorProfile = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [availability, setAvailability] = useState([]);
   const [activeSpeciality, setActiveSpeciality] = useState("");
+  const [newMaxParticipants, setNewMaxParticipants] = useState(1);
+  const [newAgeGroup, setNewAgeGroup] = useState("");
   const calendarRef = useRef(null);
 
   const specialityColorMap = useMemo(() => {
@@ -77,19 +82,20 @@ const DoctorProfile = () => {
     }
   }, [profileData]);
 
-  // availability-Einträge -> feste, einmalige Kalender-Events (KEIN wöchentliches Wiederholen)
   const calendarEvents = useMemo(() => {
-    return availability.map((a, index) => {
+    return availability.map((a) => {
       const [y, m, d] = a.date.split("-").map(Number);
       const [startH, startM] = a.startTime.split(":").map(Number);
       const [endH, endM] = a.endTime.split(":").map(Number);
 
       const start = new Date(y, m - 1, d, startH, startM);
       const end = new Date(y, m - 1, d, endH, endM);
+      const booked = a.bookedCount || 0;
+      const max = a.maxParticipants || 1;
 
       return {
-        id: String(index),
-        title: a.speciality,
+        id: getEntryKey(a),
+        title: `${a.speciality} (${booked}/${max})${a.ageGroup ? " · " + a.ageGroup : ""}`,
         start,
         end,
         backgroundColor: specialityColorMap[a.speciality] || "#94a3b8",
@@ -99,10 +105,14 @@ const DoctorProfile = () => {
     });
   }, [availability, specialityColorMap]);
 
-  // neuer Block wird ausgewählt: Woche = exakte Zeit per Drag, Monat = Tag anklicken + Uhrzeit-Prompt
   const handleSelect = (selectInfo) => {
     if (!activeSpeciality) {
       toast.warn("Bitte zuerst eine Speciality auswählen");
+      selectInfo.view.calendar.unselect();
+      return;
+    }
+    if (!newMaxParticipants || newMaxParticipants < 1) {
+      toast.warn("Bitte eine gültige maximale Teilnehmerzahl angeben");
       selectInfo.view.calendar.unselect();
       return;
     }
@@ -127,39 +137,97 @@ const DoctorProfile = () => {
 
     setAvailability((prev) => [
       ...prev,
-      { speciality: activeSpeciality, date: dateStr, startTime, endTime },
+      {
+        _tmpId: makeTmpId(),
+        speciality: activeSpeciality,
+        date: dateStr,
+        startTime,
+        endTime,
+        maxParticipants: Number(newMaxParticipants),
+        ageGroup: newAgeGroup.trim(),
+        bookedCount: 0,
+      },
     ]);
   };
 
   const handleEventClick = (clickInfo) => {
-    const index = Number(clickInfo.event.id);
-    if (window.confirm(`"${clickInfo.event.title}" Block entfernen?`)) {
-      setAvailability((prev) => prev.filter((_, i) => i !== index));
+    const key = clickInfo.event.id;
+    const entry = availability.find((a) => getEntryKey(a) === key);
+    if (!entry) return;
+
+    const action = window.prompt(
+      `"${entry.speciality}" – ${entry.bookedCount || 0}/${entry.maxParticipants} Teilnehmer, Altersgruppe: ${entry.ageGroup || "keine Angabe"}\n\n"bearbeiten" oder "löschen" eingeben:`,
+      "bearbeiten",
+    );
+    if (action === null) return;
+
+    if (action.trim().toLowerCase().startsWith("l")) {
+      if (
+        entry.bookedCount > 0 &&
+        !window.confirm(
+          "Es sind bereits Teilnehmer angemeldet. Trotzdem löschen?",
+        )
+      ) {
+        return;
+      }
+      setAvailability((prev) => prev.filter((a) => getEntryKey(a) !== key));
+      return;
     }
+
+    let newMax = window.prompt(
+      "Maximale Teilnehmerzahl",
+      String(entry.maxParticipants ?? 1),
+    );
+    if (newMax === null) return;
+    newMax = parseInt(newMax, 10);
+    if (isNaN(newMax) || newMax < 1) {
+      toast.warn("Ungültige Teilnehmerzahl");
+      return;
+    }
+    if (entry.bookedCount && newMax < entry.bookedCount) {
+      toast.warn(
+        `Es sind bereits ${entry.bookedCount} Teilnehmer gebucht – das geht nicht darunter`,
+      );
+      return;
+    }
+
+    const newAge = window.prompt(
+      "Altersgruppe (z.B. Kinder 6-10, Erwachsene)",
+      entry.ageGroup || "",
+    );
+    if (newAge === null) return;
+
+    setAvailability((prev) =>
+      prev.map((a) =>
+        getEntryKey(a) === key
+          ? { ...a, maxParticipants: newMax, ageGroup: newAge.trim() }
+          : a,
+      ),
+    );
   };
 
   const handleEventDrop = (dropInfo) => {
-    const index = Number(dropInfo.event.id);
+    const key = dropInfo.event.id;
     const date = toDateStr(dropInfo.event.start);
     const startTime = toTimeStr(dropInfo.event.start);
     const endTime = toTimeStr(dropInfo.event.end);
 
     setAvailability((prev) =>
-      prev.map((a, i) =>
-        i === index ? { ...a, date, startTime, endTime } : a,
+      prev.map((a) =>
+        getEntryKey(a) === key ? { ...a, date, startTime, endTime } : a,
       ),
     );
   };
 
   const handleEventResize = (resizeInfo) => {
-    const index = Number(resizeInfo.event.id);
+    const key = resizeInfo.event.id;
     const date = toDateStr(resizeInfo.event.start);
     const startTime = toTimeStr(resizeInfo.event.start);
     const endTime = toTimeStr(resizeInfo.event.end);
 
     setAvailability((prev) =>
-      prev.map((a, i) =>
-        i === index ? { ...a, date, startTime, endTime } : a,
+      prev.map((a) =>
+        getEntryKey(a) === key ? { ...a, date, startTime, endTime } : a,
       ),
     );
   };
@@ -190,7 +258,6 @@ const DoctorProfile = () => {
         fees: profileData.fees,
         available: profileData.available,
       };
-
       const { data } = await axios.post(
         backendUrl + "/api/doctor/update-profile",
         updateData,
@@ -210,9 +277,7 @@ const DoctorProfile = () => {
   };
 
   useEffect(() => {
-    if (dToken) {
-      getProfileData();
-    }
+    if (dToken) getProfileData();
   }, [dToken]);
 
   return (
@@ -358,11 +423,7 @@ const DoctorProfile = () => {
                 <button
                   key={s}
                   onClick={() => setActiveSpeciality(s)}
-                  className={`text-xs px-3 py-1 rounded-full border transition-all ${
-                    activeSpeciality === s
-                      ? "text-white"
-                      : "text-gray-600 bg-white"
-                  }`}
+                  className={`text-xs px-3 py-1 rounded-full border transition-all ${activeSpeciality === s ? "text-white" : "text-gray-600 bg-white"}`}
                   style={{
                     backgroundColor:
                       activeSpeciality === s
@@ -376,11 +437,38 @@ const DoctorProfile = () => {
               ))}
             </div>
 
+            <div className={"flex flex-wrap items-end gap-4 mb-3"}>
+              <div>
+                <label className={"block text-xs text-gray-500 mb-1"}>
+                  Max. Teilnehmer (nächster Block)
+                </label>
+                <input
+                  type={"number"}
+                  min={1}
+                  value={newMaxParticipants}
+                  onChange={(e) => setNewMaxParticipants(e.target.value)}
+                  className={"border rounded px-2 py-1 text-sm w-24"}
+                />
+              </div>
+              <div>
+                <label className={"block text-xs text-gray-500 mb-1"}>
+                  Altersgruppe (nächster Block)
+                </label>
+                <input
+                  type={"text"}
+                  placeholder={"z.B. Kinder 6-10"}
+                  value={newAgeGroup}
+                  onChange={(e) => setNewAgeGroup(e.target.value)}
+                  className={"border rounded px-2 py-1 text-sm w-48"}
+                />
+              </div>
+            </div>
+
             <p className={"text-xs text-gray-400 mb-2"}>
               Wochenansicht: Zeitfenster aufziehen. Monatsansicht: Tag anklicken
-              und Uhrzeit eingeben. Jeder Termin gilt nur für den exakt
-              gewählten Tag. Block anklicken = entfernen, ziehen/resizen =
-              anpassen.
+              und Uhrzeit eingeben. Max. Teilnehmer & Altersgruppe oben gelten
+              für den nächsten neu angelegten Block. Block anklicken =
+              bearbeiten oder löschen, ziehen/resizen = Zeit anpassen.
             </p>
 
             <div className={"border rounded-lg overflow-hidden"}>
