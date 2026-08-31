@@ -5,10 +5,18 @@ export const AppContext = createContext();
 const AppContextProvider = (props) => {
   const currency = "CHF";
   const calculateAge = (dob) => {
-    const today = new Date();
+    if (!dob) return "-";
     const birthDate = new Date(dob);
+    if (isNaN(birthDate.getTime())) return "-";
 
+    const today = new Date();
     let age = today.getFullYear() - birthDate.getFullYear();
+    const hasHadBirthdayThisYear =
+      today.getMonth() > birthDate.getMonth() ||
+      (today.getMonth() === birthDate.getMonth() &&
+        today.getDate() >= birthDate.getDate());
+    if (!hasHadBirthdayThisYear) age -= 1;
+
     return age;
   };
 
@@ -28,11 +36,11 @@ const AppContextProvider = (props) => {
     "Dec",
   ];
 
+  // slotDate kommt jetzt immer als "YYYY-MM-DD" aus dem Availability-Block
   const slotDateFormate = (slotDate) => {
-    const dateArray = slotDate.split("_");
-    return (
-      dateArray[0] + " " + months[Number(dateArray[1])] + " " + dateArray[2]
-    );
+    if (!slotDate) return "";
+    const [year, month, day] = slotDate.split("-");
+    return `${Number(day)} ${months[Number(month)]} ${year}`;
   };
 
   const value = {
