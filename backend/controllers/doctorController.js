@@ -2,6 +2,7 @@ import doctorModel from "../models/doctorModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import appointmentModel from "../models/appointmentModel.js";
+import { v2 as cloudinary } from "cloudinary";
 
 const changeAvailability = async (req, res) => {
     try{
@@ -164,12 +165,31 @@ const doctorProfile = async (req, res) => {
     }
 }
 
+// NEU: akzeptiert jetzt zusätzlich name, experience, about sowie optional ein neues Bild
+// (multer liefert die Datei in req.file, address kommt als JSON-String im FormData an)
 const updateDoctorProfile = async (req, res) => {
     try{
 
-        const {docId, fees, address, available} = req.body
+        const {docId, name, experience, about, fees, address, available} = req.body
 
-        await doctorModel.findByIdAndUpdate(docId, { fees, address, available})
+        const updateData = {}
+
+        if (name !== undefined) updateData.name = name
+        if (experience !== undefined) updateData.experience = experience
+        if (about !== undefined) updateData.about = about
+        if (fees !== undefined) updateData.fees = fees
+        if (available !== undefined) updateData.available = available === 'true' || available === true
+
+        if (address !== undefined) {
+            updateData.address = typeof address === 'string' ? JSON.parse(address) : address
+        }
+
+        if (req.file) {
+            const imageUpload = await cloudinary.uploader.upload(req.file.path, { resource_type: 'image' })
+            updateData.image = imageUpload.secure_url
+        }
+
+        await doctorModel.findByIdAndUpdate(docId, updateData)
 
         res.json({success: true, message: 'Profile updated successfully'})
 

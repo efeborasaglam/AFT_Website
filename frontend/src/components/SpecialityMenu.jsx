@@ -6,20 +6,20 @@ import { Link } from 'react-router-dom';
 
 const disciplines = [
     {
-        speciality: 'Athletik-Einzeltrainings',
-        label: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do',
+        speciality: 'Individual athletic training sessions',
+        label: 'Individual athletic training sessions',
     },
     {
-        speciality: 'Athletik-Gruppentraining',
-        label: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do',
+        speciality: 'Group Athletic Training',
+        label: 'Group Athletic Training',
     },
     {
         speciality: 'Online-Coaching',
-        label: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do',
+        label: 'Online-Coaching',
     },
     {
-        speciality: 'Digitale-Programme',
-        label: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do',
+        speciality: 'Digital programs',
+        label: 'Digital programs',
     },
 ];
 const SpecialityMenu = () => {
@@ -29,13 +29,13 @@ const SpecialityMenu = () => {
             id="specality"
         >
             <span className="font-mono text-xs tracking-[0.3em] text-[#C8FF3D] uppercase">
-                Disziplinen
+                Disciplines
             </span>
             <h2 className="font-['Anton'] uppercase text-3xl md:text-4xl">
                 Find by Speciality
             </h2>
             <p className="text-[#9AA0A8] text-sm text-center max-w-md">
-                Wähle einen Bereich und finde direkt passende Trainer.
+                Select an area and find suitable trainers right away.
             </p>
 
             <div className="flex gap-3 pt-8 w-full overflow-x-auto px-4 sm:justify-center sm:px-0">

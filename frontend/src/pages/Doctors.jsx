@@ -33,26 +33,33 @@ const Doctors = () => {
 
     const specialities = [
         {
-            title: 'Athletik-Einzeltrainings',
+            title: 'Athletic Individual Training',
             description:
-                'Individuell abgestimmte Athletiktrainings, die gezielt an Schnelligkeit, Explosivität, Kraft und Beweglichkeit arbeiten. Das Training wird auf die persönlichen Ziele und den aktuellen Leistungsstand des Athleten angepasst.',
+                "Individually tailored athletic training sessions that specifically target speed, explosiveness, strength, and mobility. The training is adapted to the athlete's personal goals and current performance level.",
         },
         {
-            title: 'Athletik-Gruppentraining',
+            title: 'Athletic Group Training',
             description:
-                'Professionelles Athletiktraining in kleinen Gruppen mit Fokus auf Schnelligkeit, Explosivität, Kraft und Ausdauer. Die Trainings sind speziell auf Fussballer und ambitionierte Athleten verschiedener Alters- und Leistungsstufen ausgerichtet.',
+                'Professional athletic training in small groups, focusing on speed, explosiveness, strength, and endurance. The sessions are specifically tailored to soccer players and ambitious athletes across various age groups and performance levels.',
         },
         {
             title: 'Online-Coaching',
             description:
-                'Individuelle Betreuung unabhängig vom Standort mit persönlichen Trainingsplänen, regelmässiger Kommunikation und professioneller Begleitung. Das Training kann flexibel in den eigenen Alltag integriert und kontinuierlich angepasst werden.',
+                'Personalized support regardless of location, featuring tailored training plans, regular communication, and professional guidance. The training can be flexibly integrated into your daily routine and continuously adjusted.',
         },
         {
-            title: 'Digitale-Programme',
+            title: 'Digital Programs',
             description:
-                'Strukturierte Trainingsprogramme, die jederzeit online verfügbar sind und selbstständig absolviert werden können. Die Programme bieten klare Trainingspläne und Übungen für Athleten, die ihre Leistungsfähigkeit gezielt verbessern möchten.',
+                'Structured training programs that are available online at any time and can be completed independently. The programs offer clear training plans and exercises for athletes who want to specifically improve their performance.',
         },
     ];
+
+    const specialityValue = {
+        'Athletik-Einzeltraining': 'Athletic Individual Training',
+        'Athletik-Gruppentraining': 'Athletic Group Training',
+        'Online-Coaching': 'Online Coaching',
+        'Digitale-Programme': 'Digital Programs',
+    };
 
     const toggle = (index) => {
         setOpenIndex((prev) => (prev === index ? null : index));
@@ -81,7 +88,7 @@ const Doctors = () => {
                 {/* Left - About text */}
                 <div className={'flex-1'}>
                     <span className="font-mono text-xs tracking-[0.3em] text-[#C8FF3D] uppercase">
-                        Über Uns
+                        Let's GO!
                     </span>
                     <h1
                         className={
@@ -159,7 +166,7 @@ const Doctors = () => {
             {/* --- Video Slider Section --- */}
             <div className="relative mt-24">
                 <span className="font-mono text-xs tracking-[0.3em] text-[#C8FF3D] uppercase">
-                    Impressionen
+                    Videos
                 </span>
                 <h2
                     className={
@@ -266,7 +273,9 @@ const Doctors = () => {
                                 {trainer.name}
                             </p>
                             <p className={'text-[#9AA0A8] text-sm mb-4'}>
-                                {trainer.speciality?.join(', ')}
+                                {trainer.speciality
+                                    ?.map((s) => specialityValue[s] || s)
+                                    .join(', ')}{' '}
                             </p>
                             <button
                                 onClick={() =>
@@ -276,7 +285,7 @@ const Doctors = () => {
                                     'bg-[#FF4B2E] text-[#0C0E12] px-8 py-3 rounded-full font-semibold hover:scale-105 transition-transform duration-300'
                                 }
                             >
-                                Termin buchen
+                                Book an appointment
                             </button>
                         </div>
                     </div>

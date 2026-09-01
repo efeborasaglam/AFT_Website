@@ -25,9 +25,9 @@ const Header = () => {
                         <span className="text-[#FF4B2E]">Peak</span> Potential
                     </h1>
                     <p className="text-[#9AA0A8] text-sm md:text-base max-w-md">
-                        AFT Performance (Athletic Football Training) bringt dich
-                        mit geprüften Trainern zusammen — buche deinen Termin in
-                        wenigen Klicks.
+                        AFT Performance (Athletic Football Training) connects
+                        you with certified trainers—book your session in just a
+                        few clicks.
                     </p>
 
                     <div className="flex items-center gap-3">
@@ -39,13 +39,13 @@ const Header = () => {
                             }}
                             className="bg-[#FF4B2E] text-[#0C0E12] font-semibold text-sm px-8 py-3 rounded-full hover:scale-105 transition-transform duration-300"
                         >
-                            Termin buchen
+                            Book an appointment
                         </button>
                         <button
                             onClick={() => navigate('/trainers')}
                             className="border border-[#2E333B] text-[#F5F3EE] text-sm px-8 py-3 rounded-full hover:border-[#FF4B2E] transition-colors duration-300"
                         >
-                            Trainer ansehen
+                            View trainer
                         </button>
                     </div>
                 </div>
@@ -66,7 +66,7 @@ const Header = () => {
                         />
                     </div>
                     <div className="absolute -bottom-4 -left-4 bg-[#C8FF3D] text-[#0C0E12] rounded-xl px-5 py-3 font-mono text-xs uppercase tracking-wide shadow-lg">
-                        Zahlreichen Athleten gecoacht
+                        Coached numerous athletes
                     </div>
                 </div>
             </div>

@@ -13,7 +13,7 @@ const DoctorsList = () => {
 
   return (
     <div className="m-5 max-h-[90vh] overflow-y-scroll">
-      <h1 className="text-lg font-medium">All Trainers</h1>
+      <h1 className="text-lg font-medium">Trainer</h1>
       <div className="flex flex-wrap w-full gap-4 pt-5 gap-y-6">
         {doctors.map((item, index) => (
           <div

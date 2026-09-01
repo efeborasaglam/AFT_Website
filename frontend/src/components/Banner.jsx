@@ -54,7 +54,7 @@ const Banner = () => {
                         }}
                         className="mt-6 flex-shrink-0 rounded-full bg-[#0C0E12] px-8 py-3 text-sm font-semibold text-[#F5F3EE] hover:scale-105 transition-transform duration-300"
                     >
-                        About
+                        About Us
                     </button>
                 </div>
 

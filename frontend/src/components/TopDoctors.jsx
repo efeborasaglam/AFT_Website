@@ -11,13 +11,13 @@ const TopDoctors = () => {
     return (
         <div className="flex flex-col items-center gap-3 py-20 bg-[#0C0E12] text-[#F5F3EE]">
             <span className="font-mono text-xs tracking-[0.3em] text-[#C8FF3D] uppercase">
-                Unser Team
+                HI THATS ME
             </span>
             <h2 className="font-['Anton'] uppercase text-3xl md:text-4xl">
                 Trainers to Book
             </h2>
             <p className="text-[#9AA0A8] text-sm text-center max-w-md">
-                Geprüfte Trainer, direkt online buchbar.
+                Certified trainers, bookable directly online.
             </p>
 
             <div className="w-full flex flex-wrap justify-center gap-5 pt-10 px-4 sm:px-0">
@@ -53,9 +53,7 @@ const TopDoctors = () => {
                                             : 'bg-[#9AA0A8]'
                                     }`}
                                 />
-                                {item.available
-                                    ? 'Verfügbar'
-                                    : 'Nicht verfügbar'}
+                                {item.available ? 'Available' : 'Not Available'}
                             </div>
                             <p className="mt-2 text-lg font-medium text-[#F5F3EE]">
                                 {item.name}
@@ -75,7 +73,7 @@ const TopDoctors = () => {
                 }}
                 className="mt-12 rounded-full border border-[#2E333B] px-12 py-3 text-sm uppercase tracking-wide text-[#F5F3EE] hover:border-[#FF4B2E] hover:text-[#FF4B2E] transition-colors duration-300"
             >
-                Mehr anzeigen
+                SHOW MORE ABOUT ME
             </button>
         </div>
     );

@@ -59,15 +59,15 @@ const Contact = () => {
                         Tel: 078 730 46 45 <br />
                         Email: efebora.saglam@hotmail.com
                     </p>
-                    <p className="font-semibold text-lg text-[#F5F3EE]">
-                        CAREERS AT AFT Performance
-                    </p>
-                    <p className="text-[#9AA0A8]">
-                        Learn about our teams and job openings
-                    </p>
-                    <button className="border border-[#2E333B] text-[#F5F3EE] px-8 py-4 text-sm hover:bg-[#FF4B2E] hover:text-[#0C0E12] hover:border-[#FF4B2E] transition-all duration-500">
-                        Explore Jobs
-                    </button>
+                    {/*<p className="font-semibold text-lg text-[#F5F3EE]">*/}
+                    {/*    CAREERS AT AFT Performance*/}
+                    {/*</p>*/}
+                    {/*<p className="text-[#9AA0A8]">*/}
+                    {/*    Learn about our teams and job openings*/}
+                    {/*</p>*/}
+                    {/*<button className="border border-[#2E333B] text-[#F5F3EE] px-8 py-4 text-sm hover:bg-[#FF4B2E] hover:text-[#0C0E12] hover:border-[#FF4B2E] transition-all duration-500">*/}
+                    {/*    Explore Jobs*/}
+                    {/*</button>*/}
                 </div>
             </div>
             <div className={'flex justify-center items-center'}>

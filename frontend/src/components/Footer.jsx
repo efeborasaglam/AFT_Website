@@ -18,10 +18,9 @@ const Footer = () => {
                         alt={'logo'}
                     />
                     <p className={'w-full md:w-2/3 text-[#9AA0A8] leading-6'}>
-                        AFT Performance (Athletic Football Training) bringt
-                        Athleten mit geprüften Trainern für Speed-, Kraft- und
-                        Konditionstraining zusammen — Termine unkompliziert
-                        online buchbar.
+                        AFT Performance (Athletic Football Training) connects
+                        you with certified trainers—book your session in just a
+                        few clicks.
                     </p>
                 </div>
                 {/*    center*/}
@@ -62,7 +61,7 @@ const Footer = () => {
                 {/*  copy right  */}
                 <hr className={'border-[#2E333B]'} />
                 <p className={'py-5 text-sm text-center text-[#9AA0A8]'}>
-                    Copyright 2024@ AFT Performance - All Right Reserved.
+                    Copyright 2026@ AFT Performance - All Right Reserved.
                 </p>
             </div>
         </div>

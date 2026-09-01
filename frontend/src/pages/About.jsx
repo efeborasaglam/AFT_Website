@@ -6,7 +6,7 @@ const About = () => {
         <div className={'bg-[#0C0E12] sm:mx-[11%]'}>
             <div className={'text-center text-2xl pt-10 text-[#F5F3EE]'}>
                 <p>
-                    ABOUT{' '}
+                    ABOUT US{' '}
                     <span className={'text-[#FF4B2E] font-medium'}>US</span>
                 </p>
             </div>
@@ -23,25 +23,25 @@ const About = () => {
                     }
                 >
                     <p>
-                        Ich habe sieben Jahre beim Grasshopper Club Zürich
-                        gespielt und dabei die Nachwuchsabteilungen von der U15
-                        bis zur U21 durchlaufen. Mein Ziel war der Profifussball
-                        – doch rückblickend fehlte mir unter anderem die
-                        notwendige Athletik für den letzten Schritt. Diese
-                        Erfahrung hat AFT Performance geprägt. Heute nutze ich
-                        mein Wissen als Elite Athlete Performance Coach, um
-                        junge Fussballer und ambitionierte Athleten schneller,
-                        explosiver und leistungsfähiger zu machen.
+                        I played for Grasshopper Club Zürich for seven years,
+                        progressing through the youth ranks from the U15 to the
+                        U21 level. My goal was professional football, but
+                        looking back, I lacked—among other things—the
+                        athleticism required to make that final step. That
+                        experience shaped AFT Performance. Today, I use my
+                        expertise as an Elite Athlete Performance Coach to help
+                        young footballers and ambitious athletes become faster,
+                        more explosive, and higher-performing.
                     </p>
                     <b className={'text-[#F5F3EE]'}>Our Vision</b>
                     <p>
-                        Unsere Vision ist es, Athleten gezielt dabei zu
-                        unterstützen, ihr körperliches Potenzial auszuschöpfen
-                        und ihre sportliche Leistung nachhaltig zu verbessern.
-                        Mit professionellem Athletiktraining, individueller
-                        Betreuung und modernen Trainingskonzepten möchten wir
-                        Athleten auf das nächste Level bringen – vom
-                        Nachwuchsspieler bis zum ambitionierten Erwachsenen.
+                        Our vision is to provide targeted support to athletes,
+                        helping them unlock their full physical potential and
+                        achieve sustainable improvements in their athletic
+                        performance. Through professional athletic training,
+                        personalized guidance, and modern training concepts, we
+                        aim to take athletes to the next level—from young
+                        prospects to ambitious adults.
                     </p>
                 </div>
             </div>
@@ -66,10 +66,10 @@ const About = () => {
                     />
                     <b>EFFICIENCY:</b>
                     <p>
-                        Effektives Athletiktraining mit einem klaren Ziel:
-                        bessere Leistung in kürzerer Zeit. Jede Trainingseinheit
-                        konzentriert sich auf die Fähigkeiten, die für den
-                        jeweiligen Athleten wirklich entscheidend sind.
+                        Effective athletic training with a clear goal: better
+                        performance in less time. Each training session focuses
+                        on the skills that are truly crucial for the individual
+                        athlete.
                     </p>
                 </div>
                 <div
@@ -84,11 +84,10 @@ const About = () => {
                     />
                     <b>CONVIENCE:</b>
                     <p>
-                        Training soll sich einfach in den Alltag integrieren
-                        lassen. Mit Online-Buchung, flexiblen Trainingsangeboten
-                        und zukünftig digitalen Programmen ermöglichen wir einen
-                        unkomplizierten Zugang zu professionellem
-                        Athletiktraining.
+                        Training should be easy to integrate into everyday life.
+                        Through online booking, flexible training options, and
+                        future digital programs, we provide straightforward
+                        access to professional athletic training.
                     </p>
                 </div>
                 <div
@@ -103,11 +102,10 @@ const About = () => {
                     />
                     <b>PERSONILATION</b>
                     <p>
-                        Jeder Athlet ist unterschiedlich. Deshalb werden
-                        Trainingsinhalte und Belastungen an Alter,
-                        Leistungsstand, Ziele und individuelle Bedürfnisse
-                        angepasst – für eine gezielte und nachhaltige
-                        Entwicklung.
+                        Every athlete is different. That is why training content
+                        and workloads are tailored to age, performance level,
+                        goals, and individual needs—for targeted and sustainable
+                        development.
                     </p>
                 </div>
             </div>

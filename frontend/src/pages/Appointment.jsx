@@ -17,6 +17,13 @@ const Appointment = () => {
     const [selectedDate, setSelectedDate] = useState('');
     const [selectedBlockId, setSelectedBlockId] = useState('');
 
+    const specialityValue = {
+        'Athletik-Einzeltraining': 'Athletic Individual Training',
+        'Athletik-Gruppentraining': 'Athletic Group Training',
+        'Online-Coaching': 'Online Coaching',
+        'Digitale-Programme': 'Digital Programs',
+    };
+
     const fetchDocInfo = async () => {
         const info = doctors.find((doc) => doc._id === docId);
         setDocInfo(info);
@@ -128,7 +135,9 @@ const Appointment = () => {
                         >
                             <p>
                                 {docInfo.degree} -{' '}
-                                {docInfo.speciality.join(', ')}
+                                {docInfo.speciality
+                                    .map((s) => specialityValue[s] || s)
+                                    .join(', ')}
                             </p>
                             <button
                                 className={
@@ -158,7 +167,7 @@ const Appointment = () => {
                                 >
                                     {docInfo.speciality.map((s) => (
                                         <option key={s} value={s}>
-                                            {s}
+                                            {specialityValue[s] || s}
                                         </option>
                                     ))}
                                 </select>

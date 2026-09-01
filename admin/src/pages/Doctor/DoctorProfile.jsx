@@ -65,6 +65,10 @@ const DoctorProfile = () => {
   const [newAgeGroup, setNewAgeGroup] = useState("");
   const calendarRef = useRef(null);
 
+  // NEU: Bild-Upload
+  const [imageFile, setImageFile] = useState(null);
+  const fileInputRef = useRef(null);
+
   const specialityColorMap = useMemo(() => {
     const map = {};
     (profileData?.speciality || []).forEach((s, i) => {
@@ -251,21 +255,39 @@ const DoctorProfile = () => {
     }
   };
 
+  // NEU: Datei-Auswahl fürs Profilbild (nur lokale Vorschau, Upload erst bei "Save")
+  const handleImageChange = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      toast.warn("Bitte eine Bilddatei auswählen");
+      return;
+    }
+    setImageFile(file);
+  };
+
   const updateProfile = async () => {
     try {
-      const updateData = {
-        address: profileData.address,
-        fees: profileData.fees,
-        available: profileData.available,
-      };
+      const formData = new FormData();
+      formData.append("name", profileData.name);
+      formData.append("experience", profileData.experience);
+      formData.append("about", profileData.about);
+      formData.append("fees", profileData.fees);
+      formData.append("available", profileData.available);
+      formData.append("address", JSON.stringify(profileData.address));
+      if (imageFile) {
+        formData.append("image", imageFile);
+      }
+
       const { data } = await axios.post(
         backendUrl + "/api/doctor/update-profile",
-        updateData,
-        { headers: { dToken } },
+        formData,
+        { headers: { dToken, "Content-Type": "multipart/form-data" } },
       );
       if (data.success) {
         toast.success(data.message);
         setIsEdit(false);
+        setImageFile(null);
         getProfileData();
       } else {
         toast.error(data.message);
@@ -284,12 +306,34 @@ const DoctorProfile = () => {
     profileData && (
       <div className={"flex flex-col gap-4 m-5"}>
         <div>
-          <div>
+          <div className={"relative w-full sm:max-w-64"}>
             <img
-              className={"bg-primary/80 w-full sm:max-w-64 rounded-lg"}
-              src={profileData.image}
+              className={"bg-primary/80 w-full rounded-lg"}
+              src={
+                imageFile ? URL.createObjectURL(imageFile) : profileData.image
+              }
               alt={"doc image"}
             />
+            {isEdit && (
+              <>
+                <button
+                  type={"button"}
+                  onClick={() => fileInputRef.current?.click()}
+                  className={
+                    "absolute bottom-2 right-2 bg-primary text-white text-xs px-3 py-1 rounded-full shadow hover:bg-primary/80 transition-all"
+                  }
+                >
+                  Bild ändern
+                </button>
+                <input
+                  ref={fileInputRef}
+                  type={"file"}
+                  accept={"image/*"}
+                  onChange={handleImageChange}
+                  className={"hidden"}
+                />
+              </>
+            )}
           </div>
           <div
             className={
@@ -301,15 +345,43 @@ const DoctorProfile = () => {
                 "flex items-center gap-2 text-3xl font-medium text-gray-700"
               }
             >
-              {profileData.name}
+              {isEdit ? (
+                <input
+                  type={"text"}
+                  value={profileData.name}
+                  onChange={(e) =>
+                    setProfileData((prev) => ({
+                      ...prev,
+                      name: e.target.value,
+                    }))
+                  }
+                  className={"border rounded px-2 py-1 text-2xl w-full"}
+                />
+              ) : (
+                profileData.name
+              )}
             </p>
             <div className={"flex items-center gap-2 mt-1 text-gray-600"}>
               <p>
                 {profileData.degree} - {profileData.speciality.join(", ")}
               </p>
-              <button className={"py-0.5 px-2 border text-xs rounded-full"}>
-                {profileData.experience}
-              </button>
+              {isEdit ? (
+                <input
+                  type={"text"}
+                  value={profileData.experience}
+                  onChange={(e) =>
+                    setProfileData((prev) => ({
+                      ...prev,
+                      experience: e.target.value,
+                    }))
+                  }
+                  className={"py-0.5 px-2 border text-xs rounded-full w-24"}
+                />
+              ) : (
+                <button className={"py-0.5 px-2 border text-xs rounded-full"}>
+                  {profileData.experience}
+                </button>
+              )}
             </div>
             <div>
               <p
@@ -319,9 +391,25 @@ const DoctorProfile = () => {
               >
                 About:{" "}
               </p>
-              <p className={"text-sm text-gray-600 max-w-[700px] mt-1"}>
-                {profileData.about}
-              </p>
+              {isEdit ? (
+                <textarea
+                  value={profileData.about}
+                  onChange={(e) =>
+                    setProfileData((prev) => ({
+                      ...prev,
+                      about: e.target.value,
+                    }))
+                  }
+                  rows={4}
+                  className={
+                    "text-sm text-gray-600 max-w-[700px] mt-1 border rounded px-2 py-1 w-full"
+                  }
+                />
+              ) : (
+                <p className={"text-sm text-gray-600 max-w-[700px] mt-1"}>
+                  {profileData.about}
+                </p>
+              )}
             </div>
             <p className={"text-gray-600 font-medium mt-4"}>
               Appointment fee:{" "}
