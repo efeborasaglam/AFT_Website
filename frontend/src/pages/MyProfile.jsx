@@ -3,10 +3,12 @@ import { AppContext } from '../context/AppContext.jsx';
 import { assets } from '../assets/assets.js';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 const MyProfile = () => {
     const { userData, setUserData, token, backendUrl, loadUserProfileData } =
         useContext(AppContext);
+    const { t } = useTranslation();
 
     const [isEdit, setIsEdit] = useState(false);
     const [image, setImage] = useState(false);
@@ -104,7 +106,7 @@ const MyProfile = () => {
 
                 <div>
                     <p className={'text-[#9AA0A8] underline mt-3'}>
-                        CONTACT INFORMATION
+                        {t('profile.title')}
                     </p>
 
                     <div
@@ -112,10 +114,10 @@ const MyProfile = () => {
                             'grid grid-cols-[1fr_3fr] gap-y-2.5 mt-3 text-[#D6D3CE]'
                         }
                     >
-                        <p className={'font-medium'}>Email id: </p>
+                        <p className={'font-medium'}>{t('profile.email')}: </p>
                         <p className={'text-[#FF4B2E]'}>{userData.email}</p>
 
-                        <p className={'font-medium'}>Phone: </p>
+                        <p className={'font-medium'}>{t('profile.phone')}: </p>
 
                         {isEdit ? (
                             <input
@@ -135,7 +137,9 @@ const MyProfile = () => {
                             <p className={'text-[#FF4B2E]'}>{userData.phone}</p>
                         )}
 
-                        <p className={'font-medium'}>Address: </p>
+                        <p className={'font-medium'}>
+                            {t('profile.address')}:{' '}
+                        </p>
 
                         <p>
                             {isEdit ? (
@@ -189,7 +193,7 @@ const MyProfile = () => {
 
                 <div>
                     <p className={'text-[#9AA0A8] underline mt-3'}>
-                        BASIC INFORMATION
+                        {t('profile.infos')}
                     </p>
 
                     <div
@@ -197,7 +201,7 @@ const MyProfile = () => {
                             'grid grid-cols-[1fr_3fr] gap-y-2.5 mt-3 text-[#D6D3CE]'
                         }
                     >
-                        <p className={'font-medium'}>Gender: </p>
+                        <p className={'font-medium'}>{t('profile.gender')}: </p>
 
                         {isEdit ? (
                             <select
@@ -213,10 +217,14 @@ const MyProfile = () => {
                                 value={userData.gender}
                             >
                                 <option value={'Not Selected'} disabled>
-                                    Not Selected
+                                    {t('profile.notselected')}
                                 </option>
-                                <option value={'Male'}>Male</option>
-                                <option value={'Female'}>Female</option>
+                                <option value={'Male'}>
+                                    {t('profile.male')}
+                                </option>
+                                <option value={'Female'}>
+                                    {t('profile.female')}
+                                </option>
                             </select>
                         ) : (
                             <p className={'text-[#9AA0A8]'}>
@@ -224,7 +232,9 @@ const MyProfile = () => {
                             </p>
                         )}
 
-                        <p className={'font-medium'}>Birthday: </p>
+                        <p className={'font-medium'}>
+                            {t('profile.birthday')}:{' '}
+                        </p>
 
                         {isEdit ? (
                             <input
@@ -254,7 +264,7 @@ const MyProfile = () => {
                                 'border border-[#FF4B2E] px-8 py-2 rounded-full hover:bg-[#FF4B2E] hover:text-[#0C0E12] transition-all duration-500'
                             }
                         >
-                            Save Information
+                            {t('profile.save')}
                         </button>
                     ) : (
                         <button
@@ -263,7 +273,7 @@ const MyProfile = () => {
                             }
                             onClick={() => setIsEdit(true)}
                         >
-                            Edit
+                            {t('profile.edit')}
                         </button>
                     )}
                 </div>

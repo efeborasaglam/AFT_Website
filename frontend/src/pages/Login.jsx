@@ -52,6 +52,10 @@ const Login = () => {
         }
     }, [token]);
 
+    useEffect(() => {
+        console.log(state);
+    }, [state]);
+
     return (
         <form
             onSubmit={onSubmitHandler}

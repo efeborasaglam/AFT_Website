@@ -2,9 +2,12 @@ import React, { useContext, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/AppContext.jsx';
 import { assets, videos } from '../assets/assets.js';
+import { useTranslation } from 'react-i18next';
 
 const Doctors = () => {
     const { doctors } = useContext(AppContext);
+    const { t } = useTranslation();
+
     const navigate = useNavigate();
     const [openIndex, setOpenIndex] = useState(null);
 
@@ -33,24 +36,20 @@ const Doctors = () => {
 
     const specialities = [
         {
-            title: 'Athletic Individual Training',
-            description:
-                "Individually tailored athletic training sessions that specifically target speed, explosiveness, strength, and mobility. The training is adapted to the athlete's personal goals and current performance level.",
+            title: t('speciality.individualathltetic'),
+            description: t('trainer.athleticind.text'),
         },
         {
-            title: 'Athletic Group Training',
-            description:
-                'Professional athletic training in small groups, focusing on speed, explosiveness, strength, and endurance. The sessions are specifically tailored to soccer players and ambitious athletes across various age groups and performance levels.',
+            title: t('speciality.groupathletic'),
+            description: t('trainer.group.text'),
         },
         {
-            title: 'Online-Coaching',
-            description:
-                'Personalized support regardless of location, featuring tailored training plans, regular communication, and professional guidance. The training can be flexibly integrated into your daily routine and continuously adjusted.',
+            title: t('speciality.online'),
+            description: t('trainer.online.text'),
         },
         {
-            title: 'Digital Programs',
-            description:
-                'Structured training programs that are available online at any time and can be completed independently. The programs offer clear training plans and exercises for athletes who want to specifically improve their performance.',
+            title: t('speciality.digital'),
+            description: t('trainer.digital.text'),
         },
     ];
 
@@ -95,9 +94,11 @@ const Doctors = () => {
                             "font-['Anton'] uppercase text-4xl sm:text-5xl text-[#F5F3EE] leading-[0.95] mt-3"
                         }
                     >
-                        Designed For
+                        {t('trainer.title')}
                         <br />
-                        <span className="text-[#FF4B2E]">Performance</span>
+                        <span className="text-[#FF4B2E]">
+                            {t('trainer.title.orange')}
+                        </span>
                     </h1>
                     <div
                         className={
@@ -110,7 +111,7 @@ const Doctors = () => {
                         }
                     >
                         {featuredTrainers.map((trainer) => (
-                            <p key={trainer._id}>{trainer.about}</p>
+                            <p key={trainer._id}>{t('trainer.descr')}</p>
                         ))}
                     </div>
                 </div>
@@ -173,7 +174,10 @@ const Doctors = () => {
                         "font-['Anton'] uppercase text-3xl sm:text-4xl text-[#F5F3EE] leading-[0.95] mt-3 mb-8"
                     }
                 >
-                    Training In <span className="text-[#FF4B2E]">Action</span>
+                    {t('trainer.trainerin')}{' '}
+                    <span className="text-[#FF4B2E]">
+                        {t('trainer.action')}
+                    </span>
                 </h2>
 
                 <div className="relative w-full max-w-4xl mx-auto">
@@ -208,7 +212,6 @@ const Doctors = () => {
                             ‹
                         </button>
 
-                        {/* Next arrow */}
                         <button
                             onClick={handleNext}
                             aria-label="Nächstes Video"
@@ -273,9 +276,25 @@ const Doctors = () => {
                                 {trainer.name}
                             </p>
                             <p className={'text-[#9AA0A8] text-sm mb-4'}>
-                                {trainer.speciality
-                                    ?.map((s) => specialityValue[s] || s)
-                                    .join(', ')}{' '}
+                                <p className="text-sm text-[#9AA0A8]">
+                                    {trainer.speciality
+                                        .map((s) =>
+                                            s ===
+                                            'Individual athletic training sessions'
+                                                ? t(
+                                                      'speciality.individualathltetic'
+                                                  )
+                                                : s ===
+                                                    'Group Athletic Training'
+                                                  ? t(
+                                                        'speciality.groupathletic'
+                                                    )
+                                                  : s === 'Online-Coaching'
+                                                    ? t('speciality.online')
+                                                    : t('speciality.digital')
+                                        )
+                                        .join(', ')}
+                                </p>
                             </p>
                             <button
                                 onClick={() =>
@@ -285,7 +304,7 @@ const Doctors = () => {
                                     'bg-[#FF4B2E] text-[#0C0E12] px-8 py-3 rounded-full font-semibold hover:scale-105 transition-transform duration-300'
                                 }
                             >
-                                Book an appointment
+                                {t('home.main.button')}
                             </button>
                         </div>
                     </div>

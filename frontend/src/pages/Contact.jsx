@@ -1,9 +1,12 @@
 import React, { useRef, useState } from 'react';
 import { assets } from '../assets/assets.js';
 import emailjs from '@emailjs/browser';
+import { useTranslation } from 'react-i18next';
 
 const Contact = () => {
     const form = useRef();
+    const { t } = useTranslation();
+
     const [sending, setSending] = useState(false);
 
     const sendEmail = (e) => {
@@ -35,8 +38,10 @@ const Contact = () => {
         <div className={'bg-[#0C0E12]'}>
             <div className="text-center text-2xl pt-10 text-[#F5F3EE]">
                 <p>
-                    CONTACT{' '}
-                    <span className="text-[#FF4B2E] font-semibold">US</span>
+                    {t('contact.title')}
+                    <span className="text-[#FF4B2E] font-semibold">
+                        {t('contact.title.us2')}
+                    </span>
                 </p>
             </div>
 
@@ -49,7 +54,7 @@ const Contact = () => {
 
                 <div className="flex flex-col justify-center items-start gap-6 lg:max-w-[320px]">
                     <p className="font-semibold text-lg text-[#F5F3EE]">
-                        OUR OFFICE
+                        {t('contact.location.title')}
                     </p>
                     <p className="text-[#9AA0A8]">
                         9014 St. Gallen <br />
@@ -77,7 +82,7 @@ const Contact = () => {
                     className="flex flex-col gap-4 w-full lg:max-w-[900px] border border-[#2E333B] rounded-lg p-8"
                 >
                     <p className="font-semibold text-lg text-[#F5F3EE] mb-2">
-                        SEND US A MESSAGE
+                        {t('contact.send')}{' '}
                     </p>
 
                     <div className="flex flex-col gap-1">
@@ -85,7 +90,7 @@ const Contact = () => {
                             htmlFor="from_name"
                             className="text-[#9AA0A8] text-xs font-medium"
                         >
-                            Your Name
+                            {t('contact.name')}
                         </label>
                         <input
                             type="text"
@@ -101,7 +106,7 @@ const Contact = () => {
                             htmlFor="to_name"
                             className="text-[#9AA0A8] text-xs font-medium"
                         >
-                            To
+                            {t('contact.to')}
                         </label>
                         <input
                             type="text"
@@ -117,7 +122,7 @@ const Contact = () => {
                             htmlFor="reply_to"
                             className="text-[#9AA0A8] text-xs font-medium"
                         >
-                            Your Email
+                            {t('contact.email')}
                         </label>
                         <input
                             type="email"
@@ -133,7 +138,7 @@ const Contact = () => {
                             htmlFor="message"
                             className="text-[#9AA0A8] text-xs font-medium"
                         >
-                            Message
+                            {t('contact.message')}{' '}
                         </label>
                         <textarea
                             name="message"
@@ -149,7 +154,7 @@ const Contact = () => {
                         disabled={sending}
                         className="border border-[#2E333B] text-[#F5F3EE] px-8 py-4 text-sm mt-2 hover:bg-[#FF4B2E] hover:text-[#0C0E12] hover:border-[#FF4B2E] transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                        {sending ? 'Sending...' : 'Send Email'}
+                        {sending ? 'Sending...' : t('contact.button')}
                     </button>
                 </form>
             </div>

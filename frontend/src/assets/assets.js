@@ -34,6 +34,7 @@ import video_3 from './video_3.MP4';
 import video_4 from './video_4.MP4';
 import video_5 from './video_5.MP4';
 import video_6 from './video_6.MP4';
+import trainer_pic from './trainer_pic.jpeg';
 
 export const assets = {
     appointment_img,
@@ -62,6 +63,7 @@ export const assets = {
     football_6,
     football_7,
     football_8,
+    trainer_pic,
 };
 
 export const videos = {

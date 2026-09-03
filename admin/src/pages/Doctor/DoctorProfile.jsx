@@ -393,6 +393,9 @@ const DoctorProfile = () => {
               </p>
               {isEdit ? (
                 <textarea
+                  data-gramm="false"
+                  data-gramm_editor="false"
+                  data-enable-grammarly="false"
                   value={profileData.about}
                   onChange={(e) =>
                     setProfileData((prev) => ({

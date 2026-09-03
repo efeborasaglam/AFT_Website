@@ -1,13 +1,18 @@
 import React from 'react';
 import { assets } from '../assets/assets.js';
+import { useTranslation } from 'react-i18next';
 
 const About = () => {
+    const { t } = useTranslation();
+
     return (
         <div className={'bg-[#0C0E12] sm:mx-[11%]'}>
             <div className={'text-center text-2xl pt-10 text-[#F5F3EE]'}>
                 <p>
-                    ABOUT US{' '}
-                    <span className={'text-[#FF4B2E] font-medium'}>US</span>
+                    ABOUT{' '}
+                    <span className={'text-[#FF4B2E] font-medium'}>
+                        {t('navbar.about2')}
+                    </span>
                 </p>
             </div>
 
@@ -22,34 +27,18 @@ const About = () => {
                         'flex flex-col justify-center gap-6 md:w-2/4 text-sm text-[#9AA0A8]'
                     }
                 >
-                    <p>
-                        I played for Grasshopper Club Zürich for seven years,
-                        progressing through the youth ranks from the U15 to the
-                        U21 level. My goal was professional football, but
-                        looking back, I lacked—among other things—the
-                        athleticism required to make that final step. That
-                        experience shaped AFT Performance. Today, I use my
-                        expertise as an Elite Athlete Performance Coach to help
-                        young footballers and ambitious athletes become faster,
-                        more explosive, and higher-performing.
-                    </p>
-                    <b className={'text-[#F5F3EE]'}>Our Vision</b>
-                    <p>
-                        Our vision is to provide targeted support to athletes,
-                        helping them unlock their full physical potential and
-                        achieve sustainable improvements in their athletic
-                        performance. Through professional athletic training,
-                        personalized guidance, and modern training concepts, we
-                        aim to take athletes to the next level—from young
-                        prospects to ambitious adults.
-                    </p>
+                    <p>{t('trainer.descr')}</p>
+                    <b className={'text-[#F5F3EE]'}>
+                        {t('about.vision.title')}
+                    </b>
+                    <p>{t('about.vision.descr')}</p>
                 </div>
             </div>
             <div className={'text-xl my-4 text-[#F5F3EE]'}>
                 <p>
-                    WHY{' '}
+                    {t('about.why')}
                     <span className={'text-[#FF4B2E] font-semibold'}>
-                        CHOSE US
+                        {t('about.choseus')}
                     </span>
                 </p>
             </div>
@@ -64,13 +53,8 @@ const About = () => {
                         alt="Efficiency"
                         className="w-full h-40 object-cover rounded"
                     />
-                    <b>EFFICIENCY:</b>
-                    <p>
-                        Effective athletic training with a clear goal: better
-                        performance in less time. Each training session focuses
-                        on the skills that are truly crucial for the individual
-                        athlete.
-                    </p>
+                    <b>{t('about.efficiency')}:</b>
+                    <p>{t('about.efficiency.descr')}</p>
                 </div>
                 <div
                     className={
@@ -82,13 +66,8 @@ const About = () => {
                         alt="Convenience"
                         className="w-full h-40 object-cover rounded"
                     />
-                    <b>CONVIENCE:</b>
-                    <p>
-                        Training should be easy to integrate into everyday life.
-                        Through online booking, flexible training options, and
-                        future digital programs, we provide straightforward
-                        access to professional athletic training.
-                    </p>
+                    <b>{t('about.convie')}:</b>
+                    <p>{t('about.convience.descr')}</p>
                 </div>
                 <div
                     className={
@@ -100,13 +79,8 @@ const About = () => {
                         alt="Personalization"
                         className="w-full h-40 object-cover rounded"
                     />
-                    <b>PERSONILATION</b>
-                    <p>
-                        Every athlete is different. That is why training content
-                        and workloads are tailored to age, performance level,
-                        goals, and individual needs—for targeted and sustainable
-                        development.
-                    </p>
+                    <b>{t('about.personilation')}</b>
+                    <p>{t('about.personilation.descr')}</p>
                 </div>
             </div>
         </div>

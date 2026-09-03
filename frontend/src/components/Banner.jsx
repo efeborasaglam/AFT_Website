@@ -2,10 +2,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/AppContext.jsx';
 import { assets } from '../assets/assets.js';
+import { useTranslation } from 'react-i18next';
 
 const Banner = () => {
     const navigate = useNavigate();
     const { token, userData } = useContext(AppContext);
+    const { t } = useTranslation();
 
     const [currentImage, setCurrentImage] = useState(0);
 
@@ -40,11 +42,11 @@ const Banner = () => {
                 {/* Text */}
                 <div className="text-[#0C0E12] z-10">
                     <p className="font-['Anton'] uppercase text-3xl md:text-5xl leading-tight">
-                        Start Training
+                        {t('home.about.training')}
                     </p>
 
                     <p className="font-['Anton'] uppercase text-3xl md:text-5xl leading-tight">
-                        With Trusted Trainers
+                        {t('home.about.trusted')}
                     </p>
 
                     <button
@@ -54,7 +56,7 @@ const Banner = () => {
                         }}
                         className="mt-6 flex-shrink-0 rounded-full bg-[#0C0E12] px-8 py-3 text-sm font-semibold text-[#F5F3EE] hover:scale-105 transition-transform duration-300"
                     >
-                        About Us
+                        {t('about.button')}
                     </button>
                 </div>
 
