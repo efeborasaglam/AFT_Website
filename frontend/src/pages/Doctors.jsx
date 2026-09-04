@@ -59,7 +59,13 @@ const Doctors = () => {
         'Online-Coaching': 'Online Coaching',
         'Digitale-Programme': 'Digital Programs',
     };
-
+    const specialityTranslationKey = {
+        'Individual athletic training sessions':
+            'speciality.individualathltetic',
+        'Group Athletic Training': 'speciality.groupathletic',
+        'Online-Coaching': 'speciality.online',
+        'Digitale-Programme': 'speciality.digital',
+    };
     const toggle = (index) => {
         setOpenIndex((prev) => (prev === index ? null : index));
     };
@@ -251,11 +257,9 @@ const Doctors = () => {
                 }
             >
                 {featuredTrainers.map((trainer) => (
-                    <div key={trainer._id} className={'flex flex-col'}>
+                    <div key={trainer._id} className="flex flex-col">
                         <div
-                            className={
-                                'relative rounded-xl overflow-hidden bg-[#16191F]'
-                            }
+                            className="relative rounded-xl overflow-hidden bg-[#16191F] flex justify-center"
                             style={{
                                 clipPath:
                                     'polygon(8% 0, 100% 0, 100% 100%, 0 100%)',
@@ -264,19 +268,17 @@ const Doctors = () => {
                             <img
                                 src={trainer.image}
                                 alt={trainer.name}
-                                className={'w-full h-[420px] object-cover'}
+                                className="h-[420px] object-contain"
                             />
                         </div>
-                        <div className={'mt-4 text-center'}>
-                            <p
-                                className={
-                                    "text-xl font-['Anton'] text-[#F5F3EE] uppercase"
-                                }
-                            >
+
+                        <div className="mt-4 text-center">
+                            <p className="text-xl font-['Anton'] text-[#F5F3EE] uppercase">
                                 {trainer.name}
                             </p>
-                            <p className={'text-[#9AA0A8] text-sm mb-4'}>
-                                <p className="text-sm text-[#9AA0A8]">
+
+                            <p className="text-[#9AA0A8] text-sm mb-4">
+                                <span className="text-sm text-[#9AA0A8]">
                                     {trainer.speciality
                                         .map((s) =>
                                             s ===
@@ -294,15 +296,14 @@ const Doctors = () => {
                                                     : t('speciality.digital')
                                         )
                                         .join(', ')}
-                                </p>
+                                </span>
                             </p>
+
                             <button
                                 onClick={() =>
                                     navigate(`/appointment/${trainer._id}`)
                                 }
-                                className={
-                                    'bg-[#FF4B2E] text-[#0C0E12] px-8 py-3 rounded-full font-semibold hover:scale-105 transition-transform duration-300'
-                                }
+                                className="bg-[#FF4B2E] text-[#0C0E12] px-8 py-3 rounded-full font-semibold hover:scale-105 transition-transform duration-300"
                             >
                                 {t('home.main.button')}
                             </button>

@@ -9,9 +9,9 @@ const About = () => {
         <div className={'bg-[#0C0E12] sm:mx-[11%]'}>
             <div className={'text-center text-2xl pt-10 text-[#F5F3EE]'}>
                 <p>
-                    ABOUT{' '}
+                    {t('navbar.about')}
                     <span className={'text-[#FF4B2E] font-medium'}>
-                        {t('navbar.about2')}
+                        {t('contact.title.us2')}
                     </span>
                 </p>
             </div>
@@ -66,7 +66,7 @@ const About = () => {
                         alt="Convenience"
                         className="w-full h-40 object-cover rounded"
                     />
-                    <b>{t('about.convie')}:</b>
+                    <b>{t('about.convience')}:</b>
                     <p>{t('about.convience.descr')}</p>
                 </div>
                 <div
@@ -82,6 +82,12 @@ const About = () => {
                     <b>{t('about.personilation')}</b>
                     <p>{t('about.personilation.descr')}</p>
                 </div>
+            </div>
+            <div className={'my-10 flex flex-col md:flex-row gap-12'}>
+                <p className={'text-[#FF4B2E] font-medium'}>
+                    Athletik ist deshalb kein Zusatz mehr - sie ist ein
+                    wesentlicher Bestandteil moderner Fussballleistung.
+                </p>
             </div>
         </div>
     );

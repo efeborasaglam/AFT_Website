@@ -3,9 +3,12 @@ import { AppContext } from '../context/AppContext.jsx';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const Login = () => {
     const { backendUrl, token, setToken } = useContext(AppContext);
+    const { t } = useTranslation();
+
     const navigate = useNavigate();
 
     const [state, setState] = useState('Sign Up');
@@ -67,15 +70,17 @@ const Login = () => {
                 }
             >
                 <p className={'text-2xl font-semibold text-[#F5F3EE]'}>
-                    {state === 'Sign Up' ? 'Create Account' : 'Login'}
+                    {state === 'Sign Up' ? t('nav.create') : 'Login'}
                 </p>
                 <p>
-                    Please {state === 'sign up' ? 'Create Account' : 'login'} to
-                    book appointment
+                    {t('login.please')}{' '}
+                    {state === 'Sign Up' ? t('login.createaccount') : 'Login'}{' '}
+                    to
+                    {t('login.bookappointment')}
                 </p>
                 {state === 'Sign Up' && (
                     <div className={'w-full'}>
-                        <p>Full Name</p>
+                        <p>{t('login.name')}</p>
                         <input
                             type={'text'}
                             className={
@@ -89,7 +94,7 @@ const Login = () => {
                 )}
 
                 <div className={'w-full'}>
-                    <p>Email</p>
+                    <p>{t('login.email')}</p>
                     <input
                         type={'email'}
                         onChange={(e) => setEmail(e.target.value)}
@@ -101,7 +106,7 @@ const Login = () => {
                     />
                 </div>
                 <div className={'w-full'}>
-                    <p>Password</p>
+                    <p>{t('login.password')}</p>
                     <input
                         type={'password'}
                         onChange={(e) => setPassword(e.target.value)}
@@ -118,7 +123,7 @@ const Login = () => {
                         'bg-[#FF4B2E] text-[#0C0E12] w-full py-2 rounded-md text-base font-semibold hover:scale-[1.02] transition-transform duration-300'
                     }
                 >
-                    {state === 'Sign Up' ? 'Create Account' : 'Login'}
+                    {state === 'Sign Up' ? t('nav.create') : t('login.login')}
                 </button>
                 {state === 'Sign Up' ? (
                     <p className={''}>
@@ -129,19 +134,19 @@ const Login = () => {
                             }
                             onClick={() => setState('Login')}
                         >
-                            Login here
+                            {t('login.login.here')}
                         </span>
                     </p>
                 ) : (
                     <p>
-                        Create an new account?{' '}
+                        {t('login.create')}{' '}
                         <span
                             className={
                                 'text-[#FF4B2E] underline cursor-pointer'
                             }
                             onClick={() => setState('Sign Up')}
                         >
-                            Click here
+                            {t('login.create.here')}
                         </span>
                     </p>
                 )}

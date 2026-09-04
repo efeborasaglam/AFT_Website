@@ -23,9 +23,11 @@ const Header = () => {
                     </span>
 
                     <h1 className="font-['Anton'] uppercase text-4xl md:text-5xl lg:text-6xl leading-[0.95] text-[#F5F3EE]">
+                        <span className="text-[#FF4B2E]">
+                            {t('home.main.football')}
+                        </span>
                         {t('home.main.goals')}
                         <br />
-                        <span className="text-[#FF4B2E]">Peak</span> Potential
                     </h1>
 
                     <p className="text-[#9AA0A8] text-sm md:text-base leading-relaxed max-w-md">
@@ -66,7 +68,6 @@ const Header = () => {
                             src={assets.trainer_pic}
                             alt="AFT Performance Trainer im Training"
                         />
-                        {/* dezenter Verlauf unten, damit der Badge nicht auf nacktem Bildrand sitzt */}
                         <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#0C0E12]/70 to-transparent" />
                     </div>
 

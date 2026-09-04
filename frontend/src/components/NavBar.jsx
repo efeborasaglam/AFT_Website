@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { assets } from '../assets/assets.js';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/AppContext.jsx';
+import { useTranslation } from 'react-i18next';
 
 const navLinkClass = ({ isActive }) =>
     `py-1 uppercase text-xs tracking-wide transition-colors duration-300 ${
@@ -17,6 +18,7 @@ const NavBar = () => {
     const navigate = useNavigate();
 
     const { token, setToken, userData } = useContext(AppContext);
+    const { t } = useTranslation();
 
     const [showMenu, setShowMenu] = useState(false);
 
@@ -40,16 +42,16 @@ const NavBar = () => {
 
             <ul className={'hidden md:flex items-center gap-6 font-medium'}>
                 <NavLink to={'/'} className={navLinkClass}>
-                    <li>HOME</li>
+                    <li>{t('navbar.home')}</li>
                 </NavLink>
                 <NavLink to={'/trainers'} className={navLinkClass}>
-                    <li>Trainer</li>
+                    <li>{t('navbar.trainer')}</li>
                 </NavLink>
                 <NavLink to={'/about'} className={navLinkClass}>
-                    <li>ABOUT US</li>
+                    <li>{t('navbar.about2')}</li>
                 </NavLink>
                 <NavLink to={'/contact'} className={navLinkClass}>
-                    <li>CONTACT</li>
+                    <li>{t('navbar.contact')}</li>
                 </NavLink>
             </ul>
             <div className={'flex items-center gap-4'}>
@@ -87,7 +89,7 @@ const NavBar = () => {
                                             'text-[#F5F3EE] hover:text-[#FF4B2E] cursor-pointer text-sm uppercase tracking-wide'
                                         }
                                     >
-                                        MY PROFILE
+                                        {t('nav.myprofile')}
                                     </p>
                                 </NavLink>
                                 <NavLink to={'/my-appointments'}>
@@ -96,7 +98,7 @@ const NavBar = () => {
                                             'text-[#F5F3EE] hover:text-[#FF4B2E] cursor-pointer text-sm uppercase tracking-wide'
                                         }
                                     >
-                                        MY APPOINTMENTS
+                                        {t('nav.myappointment')}{' '}
                                     </p>
                                 </NavLink>
                                 <NavLink to={'/'} onClick={logout}>
@@ -105,7 +107,7 @@ const NavBar = () => {
                                             'text-[#F5F3EE] hover:text-[#FF4B2E] cursor-pointer text-sm uppercase tracking-wide'
                                         }
                                     >
-                                        LOGOUT
+                                        {t('nav.logout')}
                                     </p>
                                 </NavLink>
                             </div>
@@ -118,7 +120,7 @@ const NavBar = () => {
                             'bg-[#FF4B2E] text-[#0C0E12] px-8 py-3 rounded-full font-semibold text-sm hidden md:block hover:scale-105 transition-transform duration-300'
                         }
                     >
-                        Create account
+                        {t('nav.create')}{' '}
                     </button>
                 )}
                 <img
@@ -158,28 +160,28 @@ const NavBar = () => {
                             to={'/'}
                             className={mobileLinkClass}
                         >
-                            HOME
+                            {t('navbar.home')}
                         </NavLink>
                         <NavLink
                             onClick={() => setShowMenu(false)}
                             to={'/trainers'}
                             className={mobileLinkClass}
                         >
-                            ALL Trainers
+                            {t('navbar.trainer')}{' '}
                         </NavLink>
                         <NavLink
                             onClick={() => setShowMenu(false)}
                             to={'/about'}
                             className={mobileLinkClass}
                         >
-                            ABOUT
+                            {t('navbar.about2')}
                         </NavLink>
                         <NavLink
                             onClick={() => setShowMenu(false)}
                             to={'/contact'}
                             className={mobileLinkClass}
                         >
-                            CONTACT
+                            {t('navbar.contact')}
                         </NavLink>
                         {token && userData ? (
                             <>
@@ -192,7 +194,7 @@ const NavBar = () => {
                                             'text-[#F5F3EE] hover:text-[#FF4B2E] cursor-pointer'
                                         }
                                     >
-                                        MY PROFILE
+                                        {t('nav.myprofile')}
                                     </p>
                                 </NavLink>
                                 <NavLink
@@ -204,7 +206,7 @@ const NavBar = () => {
                                             'text-[#F5F3EE] hover:text-[#FF4B2E] cursor-pointer'
                                         }
                                     >
-                                        MY APPOINTMENTS
+                                        {t('nav.myappointment')}
                                     </p>
                                 </NavLink>
                                 <NavLink
@@ -220,7 +222,7 @@ const NavBar = () => {
                                             'text-[#0C0E12] cursor-pointer mt-10 bg-[#FF4B2E] px-6 py-3 rounded-full font-semibold'
                                         }
                                     >
-                                        LOGOUT
+                                        {t('nav.logout')}
                                     </p>
                                 </NavLink>
                             </>

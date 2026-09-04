@@ -3,10 +3,12 @@ import { AppContext } from '../context/AppContext.jsx';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const MyAppointments = () => {
     const { backendUrl, token, getDoctorsData, slotDateFormate } =
         useContext(AppContext);
+    const { t } = useTranslation();
 
     const navigate = useNavigate();
 
@@ -102,7 +104,7 @@ const MyAppointments = () => {
                     'pb-3 mt-12 font-medium text-[#F5F3EE] border-b border-[#2E333B]'
                 }
             >
-                My Appointments
+                {t('myappointments.termine')}
             </p>
             <div>
                 {appointments.map((item, index) => (
@@ -133,7 +135,7 @@ const MyAppointments = () => {
                                 )}
                             </p>
                             <p className={'text-[#F5F3EE] font-medium mt-1'}>
-                                Address:{' '}
+                                {t('myappointments.address')}:{' '}
                             </p>
                             <p className={'text-xs'}>
                                 {item.docData.address?.line1}
@@ -147,7 +149,8 @@ const MyAppointments = () => {
                                         'text-sm mt-1 text-[#F5F3EE] font-medium'
                                     }
                                 >
-                                    Date & Time:
+                                    {t('myappointments.date')} &{' '}
+                                    {t('myappointments.time')}:
                                 </span>{' '}
                                 {slotDateFormate(item.slotDate)} |{' '}
                                 {item.slotTime}
@@ -166,7 +169,7 @@ const MyAppointments = () => {
                                             'sm:min-w-48 py-2 border border-[#2E333B] rounded text-[#9AA0A8] bg-[#16191F]'
                                         }
                                     >
-                                        Paid
+                                        {t('myappointments.paid')}
                                     </button>
                                 )}
                             {!item.cancel &&
@@ -180,7 +183,7 @@ const MyAppointments = () => {
                                             AppointmentStripe(item._id)
                                         }
                                     >
-                                        Pay Online
+                                        {t('myappointments.online')}
                                     </button>
                                 )}
 
@@ -191,7 +194,7 @@ const MyAppointments = () => {
                                     }
                                     onClick={() => cancelAppointment(item._id)}
                                 >
-                                    Cancel Appointment
+                                    {t('myappointments.cancelappointment')}
                                 </button>
                             )}
                             {item.cancel && !item.isCompleted && (
@@ -200,7 +203,7 @@ const MyAppointments = () => {
                                         'sm:min-w-48 py-2 border border-red-500 rounded text-red-500'
                                     }
                                 >
-                                    Appointment cancelled
+                                    {t('myappointments.cancel')}
                                 </button>
                             )}
                             {item.isCompleted && (
@@ -209,7 +212,7 @@ const MyAppointments = () => {
                                         'sm:min-w-48 py-2 border border-green-500 rounded text-green-500'
                                     }
                                 >
-                                    Completed
+                                    {t('myappointments.complete')}
                                 </button>
                             )}
                         </div>
