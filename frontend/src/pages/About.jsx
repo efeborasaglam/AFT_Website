@@ -83,10 +83,21 @@ const About = () => {
                     <p>{t('about.personilation.descr')}</p>
                 </div>
             </div>
-            <div className={'my-10 flex flex-col md:flex-row gap-12'}>
-                <p className={'text-[#FF4B2E] font-medium'}>
-                    Athletik ist deshalb kein Zusatz mehr - sie ist ein
-                    wesentlicher Bestandteil moderner Fussballleistung.
+            <div className={'text-center  pt-10'}>
+                <p className={'text-2xl text-white font-medium mb-5'}>
+                    <span className={'text-[#FF4B2E] '}>
+                        {t('about.athletic.title')}{' '}
+                    </span>
+                    {t('about.athletic.title.orange')}{' '}
+                </p>
+                <p className={'text-[#9AA0A8]'}>
+                    {t('about.athletic.descr')} <br />{' '}
+                    {t('about.athletic.descr2')}
+                    <span className={'text-[#FF4B2E]'}>
+                        {' '}
+                        {t('about.athletic.descr2.orange')}{' '}
+                    </span>{' '}
+                    {t('about.athletic.descr3')}
                 </p>
             </div>
         </div>

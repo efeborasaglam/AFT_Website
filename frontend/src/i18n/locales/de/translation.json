@@ -10,7 +10,7 @@
   "home.main.undergoal": "Der moderne Fussball ist schneller, intensiver und athletischer als je zuvor. Technische und taktische Fähigkeiten bleiben entscheidend - doch auf hohem Niveau reicht Talent allein nicht aus. Spieler müssen heute in der Lage sein, explosiv zu beschleunigen, hohe Geschwindigkeiten zu erreichen, abrupt die Richtung zu wechseln, Zweikämpfe körperlich zu bestehen und diese Leistungen über die gesamte Spieldauer immer wieder abzurufen.",
   "home.main.button": "Termin buchen",
   "home.main.button2": "Trainer ansehen",
-  "home.main.button3": "ZAHLREICHE ATHLETEN TRAINiert",
+  "home.main.button3": "ZAHLREICHE ATHLETEN TRAINIERT",
   "home.speciality.disciplin": "DISZIPLINEN",
   "home.speciality.title": "Nach Spezialisierung suchen",
   "home.speciality.descr": "Wähle einen Bereich, in dem du TRAINIEREN möchtest.",
@@ -105,5 +105,13 @@
   "myappointments.complete": "Abgeschlossen",
   "myappointments.online": "Online bezahlen",
   "myappointments.cancelappointment": "Termin stornieren",
-  "myappointments.paid": "Bezahlt"
+  "myappointments.paid": "Bezahlt",
+  "footer.descr": "DAS SPIEL ENTWICKELT SICH WEITER. DEINE ATHLETIK MUSS ES AUCH.",
+  "footer.descr.orange": "THE GAME EVOLVES. SO SHOULD YOUR ATHLETICISM.",
+  "about.athletic.title": "Athletik ist deshalb kein Zusatz mehr",
+  "about.athletic.title.orange": "- sie ist ein wesentlicher Bestandteil moderner Fussballleistung.",
+  "about.athletic.descr": "Schnelligkeit, Explosivität, Kraft, Agilität und Belastbarkeit können in entscheidenden Spielsituationen den Unterschied machen: beim ersten Schritt zum Ball, im Sprintduell, beim Richtungswechsel, im Zweikampf oder bei einer explosiven Aktion vor dem Tor.",
+  "about.athletic.descr2": "Genau hier setzt ",
+  "about.athletic.descr2.orange": "AFT Performance",
+  "about.athletic.descr3": "an. Mit gezieltem, fussballspezifischem Athletiktraining wollen wir Spielern dabei helfen, die körperlichen Voraussetzungen zu entwickeln, die der moderne Fussball verlangt."
 }

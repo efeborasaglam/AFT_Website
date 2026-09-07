@@ -1,8 +1,10 @@
 import React from 'react';
 import { assets } from '../assets/assets.js';
 import { useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
+    const { t } = useTranslation();
     return (
         <div className={`bg-[#0C0E12] sm:mx-[11%]`}>
             <div
@@ -18,9 +20,11 @@ const Footer = () => {
                         alt={'logo'}
                     />
                     <p className={'w-full md:w-2/3 text-[#9AA0A8] leading-6'}>
-                        AFT Performance (Athletic Football Training) connects
-                        you with certified trainers—book your session in just a
-                        few clicks.
+                        {t('footer.descr')}
+                        <br />
+                        <span className={'text-[#FF4B2E]'}>
+                            {t('footer.descr.orange')}
+                        </span>
                     </p>
                 </div>
                 {/*    center*/}
