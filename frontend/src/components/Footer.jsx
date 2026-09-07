@@ -1,10 +1,11 @@
 import React from 'react';
 import { assets } from '../assets/assets.js';
-import { useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
     const { t } = useTranslation();
+
     return (
         <div className={`bg-[#0C0E12] sm:mx-[11%]`}>
             <div
@@ -37,9 +38,19 @@ const Footer = () => {
                         Company
                     </p>
                     <ul className={'flex flex-col gap-2 text-[#9AA0A8]'}>
-                        <li>Home</li>
-                        <li>About Us</li>
-                        <li>Contact us</li>
+                        <li>
+                            <NavLink to={'/'}>{t('navbar.home')}</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/about'}>
+                                {t('navbar.about2')}
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/contact'}>
+                                {t('navbar.contact')}
+                            </NavLink>
+                        </li>
                         <li>Privacy Policy</li>
                     </ul>
                 </div>
@@ -53,8 +64,16 @@ const Footer = () => {
                         Get in Touch
                     </p>
                     <ul className={'flex flex-col gap-2 text-[#9AA0A8]'}>
-                        <li>+654641231</li>
-                        <li>fener@fener</li>
+                        <li>
+                            <a href={'tel:+41 76 586 41 70'}>
+                                +41 76 586 41 70
+                            </a>
+                        </li>
+                        <li>
+                            <a href={'mailto:aft.performance@gmail.com'}>
+                                aft.performance@gmail.com
+                            </a>
+                        </li>
                         <li className={'ms-8'}>
                             <i className="bi bi-instagram text-xl text-[#F5F3EE]"></i>
                         </li>
