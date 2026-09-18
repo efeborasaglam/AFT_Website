@@ -56,19 +56,12 @@ const Header = () => {
 
                 {/* Right side — Bild mit diagonalem Schnitt, jetzt sauber im Rahmen */}
                 <div className="relative order-1 md:order-2 max-w-md md:max-w-none mx-auto md:mx-0 w-full">
-                    <div
-                        className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl"
-                        style={{
-                            clipPath:
-                                'polygon(8% 0, 100% 0, 100% 100%, 0 100%)',
-                        }}
-                    >
+                    <div className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl  flex items-center justify-center">
                         <img
-                            className="w-full h-full object-cover"
-                            src={assets.trainer_pic}
-                            alt="AFT Performance Trainer im Training"
+                            className="w-full h-full object-contain p-8 md:p-12"
+                            src={assets.logo}
+                            alt="AFT Performance Logo"
                         />
-                        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#0C0E12]/70 to-transparent" />
                     </div>
 
                     <div className="absolute left-4 bottom-4 bg-[#C8FF3D] text-[#0C0E12] rounded-xl px-5 py-3 font-mono text-xs uppercase tracking-wide shadow-lg">

@@ -75,7 +75,9 @@ const Footer = () => {
                             </a>
                         </li>
                         <li className={'ms-8'}>
-                            <i className="bi bi-instagram text-xl text-[#F5F3EE]"></i>
+                            <a href={'http://instagram.com/aftperformance'}>
+                                <i className="bi bi-instagram text-xl text-[#F5F3EE]"></i>
+                            </a>
                         </li>
                     </ul>
                 </div>

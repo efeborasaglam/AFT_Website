@@ -45,7 +45,16 @@ const Doctors = () => {
         },
         {
             title: t('speciality.online'),
-            description: t('trainer.online.text'),
+            description: (
+                <>
+                    {t('trainer.online.text')}
+                    <br />
+                    <br />
+                    ---
+                    {t('appointment.comingsoon')}
+                    ---
+                </>
+            ),
         },
         {
             title: t('speciality.digital'),
