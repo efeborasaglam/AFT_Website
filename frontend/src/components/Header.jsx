@@ -9,13 +9,13 @@ const Header = () => {
 
     return (
         <div className="relative bg-[#0C0E12] overflow-hidden">
-            {/* Speed-line Signature: diagonale Streifen im Hintergrund, jetzt sichtbarer & über die volle Höhe */}
+            {/* Speed-line Signature */}
             <div className="pointer-events-none absolute inset-0">
                 <div className="absolute -left-16 top-0 h-[140%] w-48 -skew-x-12 bg-[#FF4B2E]/[0.08]" />
                 <div className="absolute left-32 top-0 h-[140%] w-8 -skew-x-12 bg-[#FF4B2E]/[0.08]" />
             </div>
 
-            <div className="relative mx-4 sm:mx-[6%] lg:mx-[10%] grid grid-cols-1 md:grid-cols-2 items-center gap-12 md:gap-10 py-16 md:py-24">
+            <div className="relative mx-4 sm:mx-[6%] lg:mx-[10%] grid grid-cols-1 md:grid-cols-2 items-center gap-12 md:gap-10 py-12 md:py-24 mt-25">
                 {/* Left side */}
                 <div className="flex flex-col items-start gap-6 order-2 md:order-1">
                     <span className="font-mono text-xs tracking-[0.3em] text-[#C8FF3D] uppercase">
@@ -32,6 +32,15 @@ const Header = () => {
 
                     <p className="text-[#9AA0A8] text-sm md:text-base leading-relaxed max-w-md">
                         {t('home.main.undergoal')}
+                        <br />
+                        <br />
+                        <span className={'text-white'}>
+                            {t('footer.descr')}
+                        </span>
+                        <br />
+                        <span className={'text-[#FF4B2E]'}>
+                            {t('footer.descr.orange')}
+                        </span>
                     </p>
 
                     <div className="flex flex-wrap items-center gap-3 mt-2">
@@ -54,17 +63,15 @@ const Header = () => {
                     </div>
                 </div>
 
-                {/* Right side — Bild mit diagonalem Schnitt, jetzt sauber im Rahmen */}
-                <div className="relative order-1 md:order-2 max-w-md md:max-w-none mx-auto md:mx-0 w-full">
-                    <div className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl  flex items-center justify-center">
-                        <img
-                            className="w-full h-full object-contain p-8 md:p-12"
-                            src={assets.logo}
-                            alt="AFT Performance Logo"
-                        />
-                    </div>
+                {/* Right side — Logo, ohne erzwungene Foto-Aspect-Ratio */}
+                <div className="relative order-1 md:order-2 max-w-sm md:max-w-none mx-auto md:mx-0 w-full flex flex-col items-center justify-center md:block">
+                    <img
+                        className="w-full max-w-xs md:max-w-md lg:max-w-lg h-auto object-contain"
+                        src={assets.logo}
+                        alt="AFT Performance Logo"
+                    />
 
-                    <div className="absolute left-4 bottom-4 bg-[#C8FF3D] text-[#0C0E12] rounded-xl px-5 py-3 font-mono text-xs uppercase tracking-wide shadow-lg">
+                    <div className="mt-4 md:mt-0 md:absolute md:left-4 md:top-[calc(100%+50px)] bg-[#C8FF3D] text-[#0C0E12] rounded-xl px-5 py-3 font-mono text-xs uppercase tracking-wide shadow-lg">
                         {t('home.main.button3')}
                     </div>
                 </div>
