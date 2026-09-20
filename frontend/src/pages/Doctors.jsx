@@ -102,18 +102,16 @@ const Doctors = () => {
                 {/* Left - About text */}
                 <div className={'flex-1'}>
                     <span className="font-mono text-xs tracking-[0.3em] text-[#C8FF3D] uppercase">
-                        Let's GO!
+                        Train with Purpose. Perform With Intent
                     </span>
                     <h1
                         className={
                             "font-['Anton'] uppercase text-4xl sm:text-5xl text-[#F5F3EE] leading-[0.95] mt-3"
                         }
                     >
-                        {t('trainer.title')}
+                        AFT Performance
                         <br />
-                        <span className="text-[#FF4B2E]">
-                            {t('trainer.title.orange')}
-                        </span>
+                        <span className="text-[#FF4B2E]">Our Services </span>
                     </h1>
                     <div
                         className={
@@ -260,15 +258,14 @@ const Doctors = () => {
             </div>
 
             {/* Bottom - Featured trainers */}
-            <div
-                className={
-                    'relative grid grid-cols-1 sm:grid-cols-2 gap-8 mt-20'
-                }
-            >
+            <div className="relative flex flex-wrap justify-center gap-8 mt-20">
                 {featuredTrainers.map((trainer) => (
-                    <div key={trainer._id} className="flex flex-col">
+                    <div
+                        key={trainer._id}
+                        className="flex flex-col w-full sm:w-[calc(50%-1rem)] max-w-[480px]"
+                    >
                         <div
-                            className="relative rounded-xl overflow-hidden bg-[#16191F] flex justify-center"
+                            className="relative rounded-xl overflow-hidden bg-[#16191F] aspect-[4/5]"
                             style={{
                                 clipPath:
                                     'polygon(8% 0, 100% 0, 100% 100%, 0 100%)',
@@ -277,7 +274,7 @@ const Doctors = () => {
                             <img
                                 src={trainer.image}
                                 alt={trainer.name}
-                                className="h-[420px] object-contain"
+                                className="w-full h-full object-cover object-top"
                             />
                         </div>
 
@@ -319,7 +316,6 @@ const Doctors = () => {
                         </div>
                     </div>
                 ))}
-                <img src={assets.football_2} className={'rounded-xl'} />
             </div>
         </div>
     );

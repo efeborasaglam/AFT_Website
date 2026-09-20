@@ -29,7 +29,7 @@ const About = () => {
                         'flex flex-col justify-center gap-6 md:w-2/4 text-sm text-[#9AA0A8]'
                     }
                 >
-                    <p>{t('trainer.descr')}</p>
+                    <p>{t('about.descr')}</p>
                     <b className={'text-[#F5F3EE]'}>
                         {t('about.vision.title')}
                     </b>

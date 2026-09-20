@@ -46,23 +46,27 @@ const Contact = () => {
             </div>
 
             <div className="my-10 flex flex-col justify-center lg:flex-row gap-10 mb-28 text-sm px-4 lg:px-0">
-                <img
-                    className="w-full lg:max-w-[400px] rounded object-cover"
-                    src={assets.football_7}
-                    alt="Contact"
-                />
-
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3202.6153086425857!2d8.535128976691235!3d47.41389900126402!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47900a8e61abf2af%3A0xea0e210680aa374!2sBirchstrasse%20183B%2C%208050%20Z%C3%BCrich!5e1!3m2!1sde!2sch!4v1789922577179!5m2!1sde!2sch"
+                    width="600"
+                    height="450"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    title="Standort AFT Performance"
+                ></iframe>
                 <div className="flex flex-col justify-center items-start gap-6 lg:max-w-[320px]">
                     <p className="font-semibold text-lg text-[#F5F3EE]">
                         {t('contact.location.title')}
                     </p>
                     <p className="text-[#9AA0A8]">
-                        9014 St. Gallen <br />
-                        Lehnstrasse 73
+                        8050 Zürich <br />
+                        Birchstrasse 183b
                     </p>
                     <p className="text-[#9AA0A8]">
-                        Tel: 078 730 46 45 <br />
-                        Email: efebora.saglam@hotmail.com
+                        Tel: 076 586 41 70 <br />
+                        Email: aftperformance@gmail.com
                     </p>
                     {/*<p className="font-semibold text-lg text-[#F5F3EE]">*/}
                     {/*    CAREERS AT AFT Performance*/}
