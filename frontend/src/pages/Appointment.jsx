@@ -101,6 +101,13 @@ const Appointment = () => {
     const currentDayBlocks =
         blocksByDate.find((g) => g.date === selectedDate)?.blocks || [];
 
+    const blockPrice = (b) => b.price ?? docInfo?.fees;
+    const selectedBlock = currentDayBlocks.find(
+        (b) => b._id === selectedBlockId
+    );
+    const allPrices = blocksByDate.flatMap((g) => g.blocks).map(blockPrice);
+    const minPrice = allPrices.length ? Math.min(...allPrices) : docInfo?.fees;
+
     return (
         docInfo && (
             <div className={'sm:mx-[11%] bg-[#0C0E12]'}>
@@ -208,7 +215,12 @@ const Appointment = () => {
                             {t('appointment.fee')}:{' '}
                             <span className={'text-[#F5F3EE]'}>
                                 {currencySymbol}
-                                {docInfo.fees}
+                                {selectedBlock
+                                    ? blockPrice(selectedBlock)
+                                    : allPrices.length > 1 &&
+                                        Math.max(...allPrices) !== minPrice
+                                      ? `ab ${minPrice}`
+                                      : minPrice}{' '}
                             </span>
                         </p>
                     </div>

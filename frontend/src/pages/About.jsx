@@ -81,9 +81,8 @@ const About = () => {
                     {t('about.athletic.descr')} <br />{' '}
                     {t('about.athletic.descr2')}
                     <span className={'text-[#FF4B2E]'}>
-                        {' '}
                         {t('about.athletic.descr2.orange')}{' '}
-                    </span>{' '}
+                    </span>
                     {t('about.athletic.descr3')}
                 </p>
             </div>

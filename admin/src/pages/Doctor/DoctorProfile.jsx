@@ -53,6 +53,9 @@ const getEntryKey = (a) => a._id || a._tmpId;
 const makeTmpId = () =>
   `tmp_${Date.now()}_${Math.random().toString(36).slice(2)}`;
 
+// Preis des Blocks, sonst Standardpreis (fees) aus dem Profil
+const getPrice = (a, fallback) => a.price ?? fallback;
+
 const DoctorProfile = () => {
   const { dToken, profileData, setProfileData, getProfileData, backendUrl } =
     useContext(DoctorContext);
@@ -63,9 +66,10 @@ const DoctorProfile = () => {
   const [activeSpeciality, setActiveSpeciality] = useState("");
   const [newMaxParticipants, setNewMaxParticipants] = useState(1);
   const [newAgeGroup, setNewAgeGroup] = useState("");
+  const [newPrice, setNewPrice] = useState("");
   const calendarRef = useRef(null);
 
-  // NEU: Bild-Upload
+  // Bild-Upload
   const [imageFile, setImageFile] = useState(null);
   const fileInputRef = useRef(null);
 
@@ -75,16 +79,21 @@ const DoctorProfile = () => {
       map[s] = colorPalette[i % colorPalette.length];
     });
     return map;
-  }, [profileData]);
+  }, [profileData?.speciality]);
 
+  // Kalender-Blöcke nur neu laden, wenn sich die Availability vom Server ändert
+  // (nicht bei jedem Tastendruck in den Profilfeldern)
   useEffect(() => {
     if (profileData?.availability) {
       setAvailability(profileData.availability);
     }
+  }, [profileData?.availability]);
+
+  useEffect(() => {
     if (profileData?.speciality?.length && !activeSpeciality) {
       setActiveSpeciality(profileData.speciality[0]);
     }
-  }, [profileData]);
+  }, [profileData?.speciality]);
 
   const calendarEvents = useMemo(() => {
     return availability.map((a) => {
@@ -99,7 +108,7 @@ const DoctorProfile = () => {
 
       return {
         id: getEntryKey(a),
-        title: `${a.speciality} (${booked}/${max})${a.ageGroup ? " · " + a.ageGroup : ""}`,
+        title: `${a.speciality} (${booked}/${max}) · ${getPrice(a, profileData?.fees)} ${currency}${a.ageGroup ? " · " + a.ageGroup : ""}`,
         start,
         end,
         backgroundColor: specialityColorMap[a.speciality] || "#94a3b8",
@@ -107,7 +116,7 @@ const DoctorProfile = () => {
         extendedProps: { speciality: a.speciality },
       };
     });
-  }, [availability, specialityColorMap]);
+  }, [availability, specialityColorMap, profileData?.fees, currency]);
 
   const handleSelect = (selectInfo) => {
     if (!activeSpeciality) {
@@ -117,6 +126,15 @@ const DoctorProfile = () => {
     }
     if (!newMaxParticipants || newMaxParticipants < 1) {
       toast.warn("Bitte eine gültige maximale Teilnehmerzahl angeben");
+      selectInfo.view.calendar.unselect();
+      return;
+    }
+
+    // leer = Standardpreis (fees) verwenden
+    const priceValue =
+      newPrice === "" ? Number(profileData.fees) : Number(newPrice);
+    if (!Number.isFinite(priceValue) || priceValue < 1) {
+      toast.warn("Bitte einen gültigen Preis angeben (mind. 1)");
       selectInfo.view.calendar.unselect();
       return;
     }
@@ -148,6 +166,7 @@ const DoctorProfile = () => {
         startTime,
         endTime,
         maxParticipants: Number(newMaxParticipants),
+        price: priceValue,
         ageGroup: newAgeGroup.trim(),
         bookedCount: 0,
       },
@@ -160,7 +179,7 @@ const DoctorProfile = () => {
     if (!entry) return;
 
     const action = window.prompt(
-      `"${entry.speciality}" – ${entry.bookedCount || 0}/${entry.maxParticipants} Teilnehmer, Altersgruppe: ${entry.ageGroup || "keine Angabe"}\n\n"bearbeiten" oder "löschen" eingeben:`,
+      `"${entry.speciality}" – ${entry.bookedCount || 0}/${entry.maxParticipants} Teilnehmer, Altersgruppe: ${entry.ageGroup || "keine Angabe"}, Preis: ${getPrice(entry, profileData.fees)} ${currency}\n\n"bearbeiten" oder "löschen" eingeben:`,
       "bearbeiten",
     );
     if (action === null) return;
@@ -201,10 +220,26 @@ const DoctorProfile = () => {
     );
     if (newAge === null) return;
 
+    const newPriceStr = window.prompt(
+      "Preis pro Teilnehmer",
+      String(getPrice(entry, profileData.fees)),
+    );
+    if (newPriceStr === null) return;
+    const newPriceNum = Number(newPriceStr.replace(",", "."));
+    if (!Number.isFinite(newPriceNum) || newPriceNum < 1) {
+      toast.warn("Ungültiger Preis");
+      return;
+    }
+
     setAvailability((prev) =>
       prev.map((a) =>
         getEntryKey(a) === key
-          ? { ...a, maxParticipants: newMax, ageGroup: newAge.trim() }
+          ? {
+              ...a,
+              maxParticipants: newMax,
+              ageGroup: newAge.trim(),
+              price: newPriceNum,
+            }
           : a,
       ),
     );
@@ -255,7 +290,7 @@ const DoctorProfile = () => {
     }
   };
 
-  // NEU: Datei-Auswahl fürs Profilbild (nur lokale Vorschau, Upload erst bei "Save")
+  // Datei-Auswahl fürs Profilbild (nur lokale Vorschau, Upload erst bei "Save")
   const handleImageChange = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -415,7 +450,7 @@ const DoctorProfile = () => {
               )}
             </div>
             <p className={"text-gray-600 font-medium mt-4"}>
-              Appointment fee:{" "}
+              Standardpreis:{" "}
               <span className={"text-gray-800"}>
                 {currency}{" "}
                 {isEdit ? (
@@ -553,13 +588,28 @@ const DoctorProfile = () => {
                   className={"border rounded px-2 py-1 text-sm w-48"}
                 />
               </div>
+              <div>
+                <label className={"block text-xs text-gray-500 mb-1"}>
+                  Preis ({currency}) (nächster Block)
+                </label>
+                <input
+                  type={"number"}
+                  min={1}
+                  step={"0.5"}
+                  placeholder={String(profileData.fees)}
+                  value={newPrice}
+                  onChange={(e) => setNewPrice(e.target.value)}
+                  className={"border rounded px-2 py-1 text-sm w-28"}
+                />
+              </div>
             </div>
 
             <p className={"text-xs text-gray-400 mb-2"}>
               Wochenansicht: Zeitfenster aufziehen. Monatsansicht: Tag anklicken
-              und Uhrzeit eingeben. Max. Teilnehmer & Altersgruppe oben gelten
-              für den nächsten neu angelegten Block. Block anklicken =
-              bearbeiten oder löschen, ziehen/resizen = Zeit anpassen.
+              und Uhrzeit eingeben. Max. Teilnehmer, Altersgruppe & Preis oben
+              gelten für den nächsten neu angelegten Block (Preis leer =
+              Standardpreis). Block anklicken = bearbeiten oder löschen,
+              ziehen/resizen = Zeit anpassen.
             </p>
 
             <div className={"border rounded-lg overflow-hidden"}>

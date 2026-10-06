@@ -119,7 +119,6 @@ const updateProfile = async (req, res) => {
 }
 
 // API to book appointment
-// API to book appointment
 const bookAppointment = async (req, res) => {
     try {
         const {userId, docId, availabilityId} = req.body
@@ -166,7 +165,7 @@ const bookAppointment = async (req, res) => {
             slotEndTime: block.endTime,
             userData,
             docData,
-            amount: docDataDoc.fees,
+            amount: block.price ?? docDataDoc.fees,
             date: Date.now()
         }
 
@@ -246,9 +245,9 @@ const paymentStripe = async (req, res) => {
             price_data: {
                 currency,
                 product_data: {
-                    name: `Appointment with Dr. ${appointmentData.docData.name}`
+                    name: `${appointmentData.speciality} mit ${appointmentData.docData.name} (${appointmentData.slotDate}, ${appointmentData.slotTime})`
                 },
-                unit_amount: appointmentData.amount * 100
+                unit_amount: Math.round(appointmentData.amount * 100)
             },
             quantity: 1
         }]

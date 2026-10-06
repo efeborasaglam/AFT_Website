@@ -220,6 +220,15 @@ const updateAvailability = async (req, res) => {
             if (a.bookedCount && a.bookedCount > a.maxParticipants) {
                 return res.json({ success: false, message: `Es sind bereits ${a.bookedCount} Teilnehmer gebucht – die maximale Teilnehmerzahl darf nicht darunter liegen` })
             }
+            if (a.price !== undefined && a.price !== null && a.price !== "") {
+                const p = Number(a.price)
+                if (!Number.isFinite(p) || p < 1) {
+                    return res.json({ success: false, message: "Der Preis muss mindestens 1 betragen" })
+                }
+                a.price = p
+            } else {
+                delete a.price
+            }
         }
 
         await doctorModel.findByIdAndUpdate(docId, { availability })

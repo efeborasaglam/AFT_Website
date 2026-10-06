@@ -22,6 +22,7 @@ const doctorSchema = new mongoose.Schema({
                 startTime: {type: String, required: true},   // "09:00"
                 endTime: {type: String, required: true},     // "17:00"
                 maxParticipants: {type: Number, required: true, default: 1, min: 1},
+                price: {type: Number, min: 0},
                 ageGroup: {type: String, default: ""},       // z.B. "Kinder 6-10", "Erwachsene"
                 bookedCount: {type: Number, default: 0, min: 0},
             },
